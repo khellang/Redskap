@@ -133,16 +133,16 @@ namespace Redskap
         /// </summary>
         /// <param name="value">A string containing the number to parse.</param>
         /// <param name="result">The resulting <see cref="IdentificationNumber"/> if parsing succeeded.</param>
-        /// <param name="error">The resulting <see cref="Error"/> if parsing failed.</param>
+        /// <param name="error">The resulting <see cref="ParseError"/> if parsing failed.</param>
         /// <returns>
         /// <see langword="true"/> if <paramref name="value"/> was
         /// parsed successfully; otherwise, <see langword="false"/>.
         /// </returns>
-        public static bool TryParse(string? value, out IdentificationNumber result, out Error error)
+        public static bool TryParse(string? value, out IdentificationNumber result, out ParseError error)
         {
             if (value is null)
             {
-                error = Error.InvalidLength;
+                error = ParseError.InvalidLength;
                 result = default;
                 return false;
             }
@@ -277,19 +277,19 @@ namespace Redskap
         /// </summary>
         /// <param name="value">A string containing the number to parse.</param>
         /// <param name="result">The resulting <see cref="IdentificationNumber"/> if parsing succeeded.</param>
-        /// <param name="error">The resulting <see cref="Error"/> if parsing failed.</param>
+        /// <param name="error">The resulting <see cref="ParseError"/> if parsing failed.</param>
         /// <returns>
         /// <see langword="true"/> if <paramref name="value"/> was
         /// parsed successfully; otherwise, <see langword="false"/>.
         /// </returns>
-        public static bool TryParse(ReadOnlySpan<char> value, out IdentificationNumber result, out Error error)
+        public static bool TryParse(ReadOnlySpan<char> value, out IdentificationNumber result, out ParseError error)
         {
             result = default;
             error = default;
 
             if (value.Length != Length)
             {
-                error = Error.InvalidLength;
+                error = ParseError.InvalidLength;
                 return false;
             }
 
@@ -302,7 +302,7 @@ namespace Redskap
 
                 if (digits[i] > 9)
                 {
-                    error = Error.InvalidCharacter;
+                    error = ParseError.InvalidCharacter;
                     return false;
                 }
             }
@@ -310,14 +310,14 @@ namespace Redskap
             var k2 = Checksum.Mod11(digits, K2Weights);
             if (k2 == 10 || k2 != digits[10])
             {
-                error = Error.InvalidChecksum;
+                error = ParseError.InvalidChecksum;
                 return false;
             }
 
             var k1 = Checksum.Mod11(digits, K1Weights);
             if (k1 == 10 || k1 != digits[9])
             {
-                error = Error.InvalidChecksum;
+                error = ParseError.InvalidChecksum;
                 return false;
             }
 
@@ -329,7 +329,7 @@ namespace Redskap
             var fullYear = GetFullYear(year, individual);
             if (!fullYear.HasValue)
             {
-                error = Error.InvalidYear;
+                error = ParseError.InvalidYear;
                 return false;
             }
 
@@ -372,7 +372,7 @@ namespace Redskap
             return null;
         }
 
-        private static DateTime? GetDateOfBirth(int year, int month, int day, out Kind kind, out Error error)
+        private static DateTime? GetDateOfBirth(int year, int month, int day, out Kind kind, out ParseError error)
         {
             if (day > 40)
             {
@@ -389,20 +389,20 @@ namespace Redskap
             kind = Kind.FNumber;
             return GetDate(year, month, day, out error);
 
-            static DateTime? GetDate(int year, int month, int day, out Error error)
+            static DateTime? GetDate(int year, int month, int day, out ParseError error)
             {
                 // There's no point in validating year, as any non-null
                 // result from GetFullYear should be a valid year.
 
                 if (month < 1 || month > 12)
                 {
-                    error = Error.InvalidMonth;
+                    error = ParseError.InvalidMonth;
                     return null;
                 }
 
                 if (day < 1 || day > DateTime.DaysInMonth(year, month))
                 {
-                    error = Error.InvalidDayOfMonth;
+                    error = ParseError.InvalidDayOfMonth;
                     return null;
                 }
 
@@ -414,7 +414,7 @@ namespace Redskap
         /// <summary>
         /// An enum representing an error during parsing of an identification number.
         /// </summary>
-        public enum Error
+        public enum ParseError
         {
             /// <summary>
             /// The identification number has an invalid
