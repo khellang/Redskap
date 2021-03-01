@@ -14,8 +14,20 @@
     <IncludeSymbols>true</IncludeSymbols>
     <RepositoryType>git</RepositoryType>
 
+    <MinVerDefaultPreReleasePhase>beta</MinVerDefaultPreReleasePhase>
+    <MinVerTagPrefix>v</MinVerTagPrefix>
+
+    <Description>A collection of Norwegian utilities, including:
+
+    Parsing and validating Norwegian identification numbers, such as F-, D- and H-numbers.</Description>
+    <PackageTags>norway;norwegian;fødselsnummer;personnummer;parser;validator</PackageTags>
+    <PackageIcon>icon.png</PackageIcon>
     <Authors>Kristian Hellang</Authors>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="../../icon.png" Pack="true" PackagePath="/" />
+  </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
