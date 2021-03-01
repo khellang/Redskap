@@ -51,6 +51,56 @@ namespace Redskap
         }
 
         /// <summary>
+        /// Attempts to parse the <paramref name="gender"/> from a
+        /// Norwegian identification number. The return value
+        /// indicates whether the parsing succeeded. Parsing will fail if
+        /// <paramref name="value"/> is <see langword="null"/>, empty, has an invalid
+        /// length, doesn't match checksum digits or has an otherwise invalid format.
+        /// </summary>
+        /// <param name="value">A string containing the number to parse.</param>
+        /// <param name="gender">The resulting <see cref="Gender"/> if parsing succeeded.</param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="value"/> was
+        /// parsed successfully; otherwise, <see langword="false"/>.
+        /// </returns>
+        public static bool TryParseGender(string? value, out Gender gender)
+        {
+            if (TryParse(value, out var result))
+            {
+                gender = result.Gender;
+                return true;
+            }
+
+            gender = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Attempts to parse the <paramref name="dateOfBirth"/> from a
+        /// Norwegian identification number. The return value
+        /// indicates whether the parsing succeeded. Parsing will fail if
+        /// <paramref name="value"/> is <see langword="null"/>, empty, has an invalid
+        /// length, doesn't match checksum digits or has an otherwise invalid format.
+        /// </summary>
+        /// <param name="value">A string containing the number to parse.</param>
+        /// <param name="dateOfBirth">The resulting <see cref="DateTime"/> if parsing succeeded.</param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="value"/> was
+        /// parsed successfully; otherwise, <see langword="false"/>.
+        /// </returns>
+        public static bool TryParseDateOfBirth(string? value, out DateTime dateOfBirth)
+        {
+            if (TryParse(value, out var result))
+            {
+                dateOfBirth = result.DateOfBirth;
+                return true;
+            }
+
+            dateOfBirth = default;
+            return false;
+        }
+
+        /// <summary>
         /// Attempts to parse the specified <paramref name="value"/> into an
         /// <see cref="IdentificationNumber"/> instance. The return value
         /// indicates whether the parsing succeeded. Parsing will fail if
@@ -147,6 +197,56 @@ namespace Redskap
                 }
             }
 
+            return false;
+        }
+
+        /// <summary>
+        /// Attempts to parse the <paramref name="gender"/> from a
+        /// Norwegian identification number. The return value
+        /// indicates whether the parsing succeeded. Parsing will fail if
+        /// <paramref name="value"/> is <see langword="null"/>, empty, has an invalid
+        /// length, doesn't match checksum digits or has an otherwise invalid format.
+        /// </summary>
+        /// <param name="value">A string containing the number to parse.</param>
+        /// <param name="gender">The resulting <see cref="Gender"/> if parsing succeeded.</param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="value"/> was
+        /// parsed successfully; otherwise, <see langword="false"/>.
+        /// </returns>
+        public static bool TryParseGender(ReadOnlySpan<char> value, out Gender gender)
+        {
+            if (TryParse(value, out var result))
+            {
+                gender = result.Gender;
+                return true;
+            }
+
+            gender = default;
+            return false;
+        }
+
+        /// <summary>
+        /// Attempts to parse the <paramref name="dateOfBirth"/> from a
+        /// Norwegian identification number. The return value
+        /// indicates whether the parsing succeeded. Parsing will fail if
+        /// <paramref name="value"/> is <see langword="null"/>, empty, has an invalid
+        /// length, doesn't match checksum digits or has an otherwise invalid format.
+        /// </summary>
+        /// <param name="value">A string containing the number to parse.</param>
+        /// <param name="dateOfBirth">The resulting <see cref="DateTime"/> if parsing succeeded.</param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="value"/> was
+        /// parsed successfully; otherwise, <see langword="false"/>.
+        /// </returns>
+        public static bool TryParseDateOfBirth(ReadOnlySpan<char> value, out DateTime dateOfBirth)
+        {
+            if (TryParse(value, out var result))
+            {
+                dateOfBirth = result.DateOfBirth;
+                return true;
+            }
+
+            dateOfBirth = default;
             return false;
         }
 
