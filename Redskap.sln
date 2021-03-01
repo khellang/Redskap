@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap", "src\Redskap\Redskap.csproj", "{B87AB186-87F4-4E75-9850-1E3AFC4728B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{946C0D30-9768-4165-BD94-693BBAA1F9A2}"
+ProjectSection(SolutionItems) = preProject
+	global.json = global.json
+	Directory.Build.props = Directory.Build.props
+	.gitignore = .gitignore
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap.Tests", "test\Redskap.Tests\Redskap.Tests.csproj", "{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{128004B2-9CFF-4A8D-8E34-FF58CE591952}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1E95080C-8AE0-4F3A-8F79-344F5B345245}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap.Benchmarks", "src\Redskap.Benchmarks\Redskap.Benchmarks.csproj", "{420A86F2-1F5E-4367-96A8-2B0FB89E0678}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "perf", "perf", "{1BBC2CEF-9900-4D13-94AA-9FBE34D7F8FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B87AB186-87F4-4E75-9850-1E3AFC4728B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B87AB186-87F4-4E75-9850-1E3AFC4728B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B87AB186-87F4-4E75-9850-1E3AFC4728B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B87AB186-87F4-4E75-9850-1E3AFC4728B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{420A86F2-1F5E-4367-96A8-2B0FB89E0678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{420A86F2-1F5E-4367-96A8-2B0FB89E0678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420A86F2-1F5E-4367-96A8-2B0FB89E0678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420A86F2-1F5E-4367-96A8-2B0FB89E0678}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B87AB186-87F4-4E75-9850-1E3AFC4728B0} = {128004B2-9CFF-4A8D-8E34-FF58CE591952}
+		{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F} = {1E95080C-8AE0-4F3A-8F79-344F5B345245}
+		{420A86F2-1F5E-4367-96A8-2B0FB89E0678} = {1BBC2CEF-9900-4D13-94AA-9FBE34D7F8FD}
+	EndGlobalSection
+EndGlobal
