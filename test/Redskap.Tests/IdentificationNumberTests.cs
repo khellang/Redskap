@@ -39,7 +39,7 @@ namespace Redskap.Tests
 
         public class TestData
         {
-            public TestData(string value, Gender gender, DateTime dateOfBirth, IdentificationNumberKind kind)
+            public TestData(string value, Gender gender, DateTime dateOfBirth, IdentificationNumber.Kind kind)
             {
                 Value = value;
                 Gender = gender;
@@ -53,7 +53,7 @@ namespace Redskap.Tests
 
             public DateTime DateOfBirth { get; }
 
-            public IdentificationNumberKind Kind { get; }
+            public IdentificationNumber.Kind Kind { get; }
 
             public static IEnumerable<TestData> ReadFrom(string fileName)
             {
@@ -85,13 +85,13 @@ namespace Redskap.Tests
                 return DateTime.ParseExact(value, "d.M.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
             }
 
-            private static IdentificationNumberKind GetKind(string value)
+            private static IdentificationNumber.Kind GetKind(string value)
             {
                 return value switch
                 {
-                    "F" => IdentificationNumberKind.FNumber,
-                    "D" => IdentificationNumberKind.DNumber,
-                    "H" => IdentificationNumberKind.HNumber,
+                    "F" => IdentificationNumber.Kind.FNumber,
+                    "D" => IdentificationNumber.Kind.DNumber,
+                    "H" => IdentificationNumber.Kind.HNumber,
                     _ => throw new ArgumentException($"Invalid kind: {value}", nameof(value)),
                 };
             }

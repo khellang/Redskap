@@ -8,11 +8,11 @@ namespace Redskap
     /// </summary>
     public readonly partial struct IdentificationNumber : IEquatable<IdentificationNumber>
     {
-        private IdentificationNumber(DateTime dateOfBirth, int individualNumber, IdentificationNumberKind kind)
+        private IdentificationNumber(DateTime dateOfBirth, int individualNumber, Kind kind)
         {
             DateOfBirth = dateOfBirth;
             IndividualNumber = individualNumber;
-            Kind = kind;
+            NumberKind = kind;
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Redskap
         /// <summary>
         /// The identification number kind.
         /// </summary>
-        public IdentificationNumberKind Kind { get; }
+        public Kind NumberKind { get; }
 
         /// <summary>
         /// The <see cref="Gender"/> represented by this
@@ -41,8 +41,8 @@ namespace Redskap
         public bool Equals(IdentificationNumber other)
         {
             return DateOfBirth.Equals(other.DateOfBirth)
-                && IndividualNumber == other.IndividualNumber
-                && Kind == other.Kind;
+                   && IndividualNumber == other.IndividualNumber
+                   && NumberKind == other.NumberKind;
         }
 
         /// <inheritdoc />
@@ -54,7 +54,7 @@ namespace Redskap
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return HashCode.Combine(DateOfBirth, IndividualNumber, Kind);
+            return HashCode.Combine(DateOfBirth, IndividualNumber, NumberKind);
         }
 
         /// <summary>
@@ -94,6 +94,43 @@ namespace Redskap
         private static Gender GetGender(int individual)
         {
             return individual % 2 == 0 ? Gender.Female : Gender.Male;
+        }
+
+        /// <summary>
+        /// An enum representing the different types of Norwegian identification numbers.
+        /// </summary>
+        public enum Kind
+        {
+            /// <summary>
+            /// A Norwegian national identity number, or F-number, is a unique
+            /// identifying number assigned to persons born in Norway.
+            /// </summary>
+            /// <remarks>
+            /// The number consists of 11 digits, of which the first six digits indicate
+            /// the person's date of birth.
+            /// </remarks>
+            FNumber = 0,
+
+            /// <summary>
+            /// A D number is a temporary identification number which can be assigned to foreign
+            /// persons who'll generally be resident in Norway for less than six months.
+            /// </summary>
+            /// <remarks>
+            /// The number consists of 11 digits, of which the first six digits indicate
+            /// the person's date of birth, but the first digit is increased by 4.
+            /// </remarks>
+            DNumber = 1,
+
+            /// <summary>
+            /// An H number is a emergency/temporary identification number assigned to persons
+            /// that don't have an F- og D-number, or where this number is unknown. It's typically
+            /// used
+            /// </summary>
+            /// <remarks>
+            /// The number consists of 11 digits, of which the first six digits indicate
+            /// the person's date of birth, but the third digit is increased by 4.
+            /// </remarks>
+            HNumber = 2,
         }
     }
 }

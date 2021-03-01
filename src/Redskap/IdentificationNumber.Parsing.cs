@@ -32,7 +32,7 @@ namespace Redskap
         /// <param name="kind">The kind to validate against.</param>
         /// <returns><see langword="true"/> if the specified value
         /// is valid; otherwise, <see langword="false"/>.</returns>
-        public static bool IsValid(string? value, IdentificationNumberKind kind)
+        public static bool IsValid(string? value, Kind kind)
         {
             return value is not null && IsValid(value.AsSpan(), kind);
         }
@@ -45,7 +45,7 @@ namespace Redskap
         /// <param name="kinds">The kinds to validate against.</param>
         /// <returns><see langword="true"/> if the specified value
         /// is valid; otherwise, <see langword="false"/>.</returns>
-        public static bool IsValid(string? value, IEnumerable<IdentificationNumberKind> kinds)
+        public static bool IsValid(string? value, IEnumerable<Kind> kinds)
         {
             return value is not null && IsValid(value.AsSpan(), kinds);
         }
@@ -171,9 +171,9 @@ namespace Redskap
         /// <param name="kind">The kind to validate against.</param>
         /// <returns><see langword="true"/> if the specified value
         /// is valid; otherwise, <see langword="false"/>.</returns>
-        public static bool IsValid(ReadOnlySpan<char> value, IdentificationNumberKind kind)
+        public static bool IsValid(ReadOnlySpan<char> value, Kind kind)
         {
-            return TryParse(value, out var result) && result.Kind == kind;
+            return TryParse(value, out var result) && result.NumberKind == kind;
         }
 
         /// <summary>
@@ -184,13 +184,13 @@ namespace Redskap
         /// <param name="kinds">The kinds to validate against.</param>
         /// <returns><see langword="true"/> if the specified value
         /// is valid; otherwise, <see langword="false"/>.</returns>
-        public static bool IsValid(ReadOnlySpan<char> value, IEnumerable<IdentificationNumberKind> kinds)
+        public static bool IsValid(ReadOnlySpan<char> value, IEnumerable<Kind> kinds)
         {
             if (TryParse(value, out var result))
             {
                 foreach (var kind in kinds)
                 {
-                    if (result.Kind == kind)
+                    if (result.NumberKind == kind)
                     {
                         return true;
                     }
@@ -372,21 +372,21 @@ namespace Redskap
             return null;
         }
 
-        private static DateTime? GetDateOfBirth(int year, int month, int day, out IdentificationNumberKind kind, out Error error)
+        private static DateTime? GetDateOfBirth(int year, int month, int day, out Kind kind, out Error error)
         {
             if (day > 40)
             {
-                kind = IdentificationNumberKind.DNumber;
+                kind = Kind.DNumber;
                 return GetDate(year, month, day - 40, out error);
             }
 
             if (month > 40)
             {
-                kind = IdentificationNumberKind.HNumber;
+                kind = Kind.HNumber;
                 return GetDate(year, month - 40, day, out error);
             }
 
-            kind = IdentificationNumberKind.FNumber;
+            kind = Kind.FNumber;
             return GetDate(year, month, day, out error);
 
             static DateTime? GetDate(int year, int month, int day, out Error error)
