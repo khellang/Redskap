@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Redskap
 {
@@ -11,6 +12,44 @@ namespace Redskap
         private const int Length = 11;
 
 #if NETSTANDARD
+        /// <summary>
+        /// Determines whether the specified <paramref name="value"/>
+        /// is a valid Norwegian identification number.
+        /// </summary>
+        /// <param name="value">The value to validate.</param>
+        /// <returns><see langword="true"/> if the specified value
+        /// is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(string? value)
+        {
+            return value is not null && IsValid(value.AsSpan());
+        }
+
+        /// <summary>
+        /// Determines whether the specified <paramref name="value"/> is a valid
+        /// Norwegian identification number of the specified <paramref name="kind"/>.
+        /// </summary>
+        /// <param name="value">The value to validate.</param>
+        /// <param name="kind">The kind to validate against.</param>
+        /// <returns><see langword="true"/> if the specified value
+        /// is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(string? value, IdentificationNumberKind kind)
+        {
+            return value is not null && IsValid(value.AsSpan(), kind);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <paramref name="value"/> is a valid
+        /// Norwegian identification number of one of the specified <paramref name="kinds"/>.
+        /// </summary>
+        /// <param name="value">The value to validate.</param>
+        /// <param name="kinds">The kinds to validate against.</param>
+        /// <returns><see langword="true"/> if the specified value
+        /// is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(string? value, IEnumerable<IdentificationNumberKind> kinds)
+        {
+            return value is not null && IsValid(value.AsSpan(), kinds);
+        }
+
         /// <summary>
         /// Attempts to parse the specified <paramref name="value"/> into an
         /// <see cref="IdentificationNumber"/> instance. The return value
@@ -61,6 +100,55 @@ namespace Redskap
             return TryParse(value.AsSpan(), out result, out error);
         }
 #endif
+
+        /// <summary>
+        /// Determines whether the specified <paramref name="value"/>
+        /// is a valid Norwegian identification number.
+        /// </summary>
+        /// <param name="value">The value to validate.</param>
+        /// <returns><see langword="true"/> if the specified value
+        /// is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(ReadOnlySpan<char> value)
+        {
+            return TryParse(value, out _);
+        }
+
+        /// <summary>
+        /// Determines whether the specified <paramref name="value"/> is a valid
+        /// Norwegian identification number of the specified <paramref name="kind"/>.
+        /// </summary>
+        /// <param name="value">The value to validate.</param>
+        /// <param name="kind">The kind to validate against.</param>
+        /// <returns><see langword="true"/> if the specified value
+        /// is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(ReadOnlySpan<char> value, IdentificationNumberKind kind)
+        {
+            return TryParse(value, out var result) && result.Kind == kind;
+        }
+
+        /// <summary>
+        /// Determines whether the specified <paramref name="value"/> is a valid
+        /// Norwegian identification number of one of the specified <paramref name="kinds"/>.
+        /// </summary>
+        /// <param name="value">The value to validate.</param>
+        /// <param name="kinds">The kinds to validate against.</param>
+        /// <returns><see langword="true"/> if the specified value
+        /// is valid; otherwise, <see langword="false"/>.</returns>
+        public static bool IsValid(ReadOnlySpan<char> value, IEnumerable<IdentificationNumberKind> kinds)
+        {
+            if (TryParse(value, out var result))
+            {
+                foreach (var kind in kinds)
+                {
+                    if (result.Kind == kind)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Attempts to parse the specified <paramref name="value"/> into an
