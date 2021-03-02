@@ -27,6 +27,18 @@
   
   <ItemGroup>
     <None Include="../../icon.png" Pack="true" PackagePath="/" />
+    <Compile Update="IdentificationNumber.Formatting.cs">
+      <DependentUpon>IdentificationNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IdentificationNumber.Generation.cs">
+      <DependentUpon>IdentificationNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IdentificationNumber.Parsing.cs">
+      <DependentUpon>IdentificationNumber.cs</DependentUpon>
+    </Compile>
+    <Compile Update="IdentificationNumber.Parsing.netstandard.cs">
+      <DependentUpon>IdentificationNumber.Parsing.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
