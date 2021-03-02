@@ -17,7 +17,7 @@
     <MinVerDefaultPreReleasePhase>beta</MinVerDefaultPreReleasePhase>
     <MinVerTagPrefix>v</MinVerTagPrefix>
 
-    <Description>A collection of Norwegian utilities, including:
+    <Description>A collection of blazing fast Norwegian utilities with a modern API. These include:
 
     Parsing and validating Norwegian identification numbers, such as F-, D- and H-numbers.</Description>
     <PackageTags>norway;norwegian;fødselsnummer;personnummer;parser;validator</PackageTags>
