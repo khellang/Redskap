@@ -8,10 +8,11 @@ namespace Redskap
     /// </summary>
     public readonly partial struct IdentificationNumber : IEquatable<IdentificationNumber>
     {
-        private IdentificationNumber(DateTime dateOfBirth, int individualNumber, Kind kind)
+        private IdentificationNumber(DateTime dateOfBirth, int individualNumber, int checkDigits, Kind kind)
         {
             DateOfBirth = dateOfBirth;
             IndividualNumber = individualNumber;
+            CheckDigits = checkDigits;
             NumberKind = kind;
         }
 
@@ -37,12 +38,14 @@ namespace Redskap
         /// </summary>
         public Gender Gender => GetGender(IndividualNumber);
 
+        private int CheckDigits { get; }
+
         /// <inheritdoc />
         public bool Equals(IdentificationNumber other)
         {
             return DateOfBirth.Equals(other.DateOfBirth)
-                   && IndividualNumber == other.IndividualNumber
-                   && NumberKind == other.NumberKind;
+                && IndividualNumber == other.IndividualNumber
+                && NumberKind == other.NumberKind;
         }
 
         /// <inheritdoc />
@@ -83,12 +86,6 @@ namespace Redskap
         public static bool operator !=(IdentificationNumber left, IdentificationNumber right)
         {
             return !left.Equals(right);
-        }
-
-        /// <inheritdoc />
-        public override string ToString()
-        {
-            return $"{Gender} {IndividualNumber} born {DateOfBirth:d}";
         }
 
         private static Gender GetGender(int individual)
