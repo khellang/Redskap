@@ -22,15 +22,46 @@ namespace Redskap
 
             private Random Random { get; }
 
+            /// <summary>
+            /// Generates a valid <see cref="IdentificationNumber"/> of the specified <paramref name="kind"/>.
+            /// </summary>
+            /// <param name="kind">The kind of identification number to generate.</param>
+            /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
             public IdentificationNumber Generate(Kind kind) =>
                 Generate(kind, Random.NextGender());
 
+            /// <summary>
+            /// Generates a valid <see cref="IdentificationNumber"/> with the
+            /// specified <paramref name="gender"/> and <paramref name="kind"/>.
+            /// </summary>
+            /// <param name="kind">The kind of identification number to generate.</param>
+            /// <param name="gender">The gender to generate an identification number for.</param>
+            /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
             public IdentificationNumber Generate(Kind kind, Gender gender) =>
                 Generate(kind, gender, MinValue, MaxValue);
 
+            /// <summary>
+            /// Generates a valid <see cref="IdentificationNumber"/> with the
+            /// specified <paramref name="gender"/>, a date of birth between
+            /// <paramref name="minValue"/> and <paramref name="maxValue"/>,
+            /// and the specified <paramref name="kind"/>.
+            /// </summary>
+            /// <param name="kind">The kind of identification number to generate.</param>
+            /// <param name="gender">The gender to generate an identification number for.</param>
+            /// <param name="minValue">The inclusive lower bound for the date of birth.</param>
+            /// <param name="maxValue">The inclusive upper bound for the date of birth.</param>
+            /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
             public IdentificationNumber Generate(Kind kind, Gender gender, DateTime minValue, DateTime maxValue) =>
                 Generate(kind, gender, Random.NextDate(minValue, maxValue));
 
+            /// <summary>
+            /// Generates a valid <see cref="IdentificationNumber"/> with the
+            /// specified <paramref name="gender"/>, <paramref name="dateOfBirth"/> and <paramref name="kind"/>.
+            /// </summary>
+            /// <param name="kind">The kind of identification number to generate.</param>
+            /// <param name="gender">The gender to generate an identification number for.</param>
+            /// <param name="dateOfBirth">The date of birth to generate an identificatin number for.</param>
+            /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
             public IdentificationNumber Generate(Kind kind, Gender gender, DateTime dateOfBirth)
             {
                 Span<byte> buffer = stackalloc byte[Length];
