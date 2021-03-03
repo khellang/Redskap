@@ -35,7 +35,7 @@ namespace Redskap
             value /= 10;
             buffer[startingIndex + 2] = (byte) (temp - (value * 10));
 
-            temp = '0' + value;
+            temp = value;
             value /= 10;
             buffer[startingIndex + 1] = (byte) (temp - (value * 10));
 
