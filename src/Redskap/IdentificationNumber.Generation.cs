@@ -41,6 +41,18 @@ namespace Redskap
                 Generate(kind, gender, MinValue, MaxValue);
 
             /// <summary>
+            /// Generates a valid <see cref="IdentificationNumber"/> with a date of birth
+            /// between <paramref name="minValue"/> and <paramref name="maxValue"/>,
+            /// and the specified <paramref name="kind"/>.
+            /// </summary>
+            /// <param name="kind">The kind of identification number to generate.</param>
+            /// <param name="minValue">The inclusive lower bound for the date of birth.</param>
+            /// <param name="maxValue">The inclusive upper bound for the date of birth.</param>
+            /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
+            public IdentificationNumber Generate(Kind kind, DateTime minValue, DateTime maxValue) =>
+                Generate(kind, Random.NextGender(), minValue, maxValue);
+
+            /// <summary>
             /// Generates a valid <see cref="IdentificationNumber"/> with the
             /// specified <paramref name="gender"/>, a date of birth between
             /// <paramref name="minValue"/> and <paramref name="maxValue"/>,
@@ -53,6 +65,16 @@ namespace Redskap
             /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
             public IdentificationNumber Generate(Kind kind, Gender gender, DateTime minValue, DateTime maxValue) =>
                 Generate(kind, gender, Random.NextDate(minValue, maxValue));
+
+            /// <summary>
+            /// Generates a valid <see cref="IdentificationNumber"/> with the
+            /// specified <paramref name="dateOfBirth"/> and <paramref name="kind"/>.
+            /// </summary>
+            /// <param name="kind">The kind of identification number to generate.</param>
+            /// <param name="dateOfBirth">The date of birth to generate an identificatin number for.</param>
+            /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
+            public IdentificationNumber Generate(Kind kind, DateTime dateOfBirth) =>
+                Generate(kind, Random.NextGender(), dateOfBirth);
 
             /// <summary>
             /// Generates a valid <see cref="IdentificationNumber"/> with the
