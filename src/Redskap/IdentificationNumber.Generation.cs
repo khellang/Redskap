@@ -92,7 +92,7 @@ namespace Redskap
 
                 FormattingHelpers.WriteTwoDecimalDigits((uint) day, buffer, 0);
                 FormattingHelpers.WriteTwoDecimalDigits((uint) month, buffer, 2);
-                FormattingHelpers.WriteTwoDecimalDigits((uint) year, buffer, 4);
+                FormattingHelpers.WriteTwoDecimalDigits((uint) year % 100, buffer, 4); // Trim off century.
 
                 foreach (var individualNumber in Random.GetIndividualNumbers(dateOfBirth.Year))
                 {
