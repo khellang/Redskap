@@ -181,8 +181,8 @@ namespace Redskap
                 return false;
             }
 
-            var individual = (digits[6] * 100) + (digits[7] * 10) + digits[8];
-            var year = (digits[4] * 10) + digits[5];
+            var individual = digits[8] + (digits[7] * 10) + (digits[6] * 100);
+            var year = digits[5] + (digits[4] * 10);
 
             var fullYear = GetFullYear(year, individual);
             if (!fullYear.HasValue)
@@ -191,8 +191,8 @@ namespace Redskap
                 return false;
             }
 
-            var day = (digits[0] * 10) + digits[1];
-            var month = (digits[2] * 10) + digits[3];
+            var month = digits[3] + (digits[2] * 10);
+            var day = digits[1] + (digits[0] * 10);
 
             var dateOfBirth = GetDateOfBirth(fullYear.Value, month, day, out var kind, out error);
             if (!dateOfBirth.HasValue)
