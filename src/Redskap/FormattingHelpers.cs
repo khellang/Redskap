@@ -16,11 +16,11 @@ namespace Redskap
         {
             Debug.Assert(value <= 99);
 
-            var temp = '0' + value;
+            var temp = value;
             value /= 10;
-            destination[offset + 1] = (byte)(temp - (value * 10));
+            destination[offset + 1] = (byte) (temp - (value * 10));
 
-            destination[offset] = (byte)('0' + value);
+            destination[offset] = (byte) value;
         }
 
         /// <summary>
@@ -32,15 +32,15 @@ namespace Redskap
         {
             Debug.Assert(value <= 999);
 
-            var temp = '0' + value;
+            var temp = value;
             value /= 10;
-            buffer[startingIndex + 2] = (byte)(temp - (value * 10));
+            buffer[startingIndex + 2] = (byte) (temp - (value * 10));
 
             temp = '0' + value;
             value /= 10;
-            buffer[startingIndex + 1] = (byte)(temp - (value * 10));
+            buffer[startingIndex + 1] = (byte) (temp - (value * 10));
 
-            buffer[startingIndex] = (byte)('0' + value);
+            buffer[startingIndex] = (byte) value;
         }
     }
 }
