@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Xunit;
+using static Redskap.IdentificationNumber;
 
 namespace Redskap.Tests
 {
@@ -16,9 +17,11 @@ namespace Redskap.Tests
         {
             foreach (var testData in TestData.ReadFrom(path))
             {
-                Assert.True(IdentificationNumber.TryParse(testData.Value, out var result));
+                Assert.True(TryParse(testData.Value, out var result));
                 Assert.Equal(testData.DateOfBirth, result.DateOfBirth);
+                Assert.Equal(testData.Kind, result.NumberKind);
                 Assert.Equal(testData.Gender, result.Gender);
+                Assert.Equal(testData.Value, result.ToString());
             }
         }
 
@@ -34,12 +37,32 @@ namespace Redskap.Tests
         [InlineData("01010101010", "Feil kontrollsiffer")]
         public void TryParse_Invalid_Returns_False(string identityNumber, string description)
         {
-            Assert.False(IdentificationNumber.TryParse(identityNumber, out _), description);
+            Assert.False(TryParse(identityNumber, out _), description);
+        }
+
+        [Fact]
+        public void Full_Roundtrip()
+        {
+            var gen = new Generator(new Random(123));
+
+            for (var i = 0; i < 10_000; i++)
+            {
+                var generated = gen.Generate(Kind.FNumber);
+
+                Assert.True(TryParse(generated.ToString(), out var parsed));
+
+                Assert.Equal(generated.IndividualNumber, parsed.IndividualNumber);
+                Assert.Equal(generated.DateOfBirth, parsed.DateOfBirth);
+                Assert.Equal(generated.NumberKind, parsed.NumberKind);
+                Assert.Equal(generated.Gender, parsed.Gender);
+
+                Assert.Equal(generated.ToString(), parsed.ToString());
+            }
         }
 
         public class TestData
         {
-            public TestData(string value, Gender gender, DateTime dateOfBirth, IdentificationNumber.Kind kind)
+            public TestData(string value, Gender gender, DateTime dateOfBirth, Kind kind)
             {
                 Value = value;
                 Gender = gender;
@@ -53,7 +76,7 @@ namespace Redskap.Tests
 
             public DateTime DateOfBirth { get; }
 
-            public IdentificationNumber.Kind Kind { get; }
+            public Kind Kind { get; }
 
             public static IEnumerable<TestData> ReadFrom(string fileName)
             {
@@ -85,13 +108,13 @@ namespace Redskap.Tests
                 return DateTime.ParseExact(value, "d.M.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal);
             }
 
-            private static IdentificationNumber.Kind GetKind(string value)
+            private static Kind GetKind(string value)
             {
                 return value switch
                 {
-                    "F" => IdentificationNumber.Kind.FNumber,
-                    "D" => IdentificationNumber.Kind.DNumber,
-                    "H" => IdentificationNumber.Kind.HNumber,
+                    "F" => Kind.FNumber,
+                    "D" => Kind.DNumber,
+                    "H" => Kind.HNumber,
                     _ => throw new ArgumentException($"Invalid kind: {value}", nameof(value)),
                 };
             }
