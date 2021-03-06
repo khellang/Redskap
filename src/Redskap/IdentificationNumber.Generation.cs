@@ -86,13 +86,9 @@ namespace Redskap
             /// <returns>A valid <see cref="IdentificationNumber"/>.</returns>
             public IdentificationNumber Generate(Kind kind, Gender gender, DateTime dateOfBirth)
             {
-                Span<byte> buffer = stackalloc byte[Length];
+                Span<char> buffer = stackalloc char[Length];
 
-                var (day, month, year) = AdjustByKind(dateOfBirth, kind);
-
-                FormattingHelpers.WriteTwoDecimalDigits((uint) day, buffer, 0);
-                FormattingHelpers.WriteTwoDecimalDigits((uint) month, buffer, 2);
-                FormattingHelpers.WriteTwoDecimalDigits((uint) year % 100, buffer, 4); // Trim off century.
+                WriteDateOfBirth(buffer, dateOfBirth, kind);
 
                 foreach (var individualNumber in Random.GetIndividualNumbers(dateOfBirth.Year))
                 {
@@ -113,18 +109,18 @@ namespace Redskap
                 throw new InvalidOperationException("Failed to generate identification number based on the specified constraints.");
             }
 
-            private static bool HasValidCheckDigits(Span<byte> digits, out int checkDigits)
+            private static bool HasValidCheckDigits(Span<char> buffer, out int checkDigits)
             {
-                var k1 = Checksum.Mod11(digits, K1Weights);
+                var k1 = Checksum.Mod11(buffer, K1Weights);
                 if (k1 == 10)
                 {
                     checkDigits = default;
                     return false;
                 }
 
-                digits[9] = k1; // Ugh, this feels yucky :(
+                buffer[9] = FormattingHelpers.GetChar(k1); // Ugh, this feels yucky :(
 
-                var k2 = Checksum.Mod11(digits, K2Weights);
+                var k2 = Checksum.Mod11(buffer, K2Weights);
                 if (k2 == 10)
                 {
                     checkDigits = default;
@@ -133,17 +129,6 @@ namespace Redskap
 
                 checkDigits = (k1 * 10) + k2;
                 return true;
-            }
-
-            private static (int day, int month, int year) AdjustByKind(DateTime date, Kind kind)
-            {
-                return kind switch
-                {
-                    Kind.FNumber => (date.Day, date.Month, date.Year),
-                    Kind.DNumber => (date.Day + 40, date.Month, date.Year),
-                    Kind.HNumber => (date.Day, date.Month + 40, date.Year),
-                    _ => throw new ArgumentException($"Invalid kind: {kind}", nameof(kind)),
-                };
             }
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using static Redskap.ParsingHelpers;
 
 namespace Redskap
 {
@@ -153,36 +154,22 @@ namespace Redskap
                 return false;
             }
 
-            Span<byte> digits = stackalloc byte[Length];
-
-            for (var i = 0; i < Length; i++)
-            {
-                // Convert ASCII characters to numeric values
-                digits[i] = (byte) (value[i] - '0');
-
-                if (digits[i] > 9)
-                {
-                    error = ParseError.InvalidCharacter;
-                    return false;
-                }
-            }
-
-            var k2 = Checksum.Mod11(digits, K2Weights);
-            if (k2 == 10 || k2 != digits[10])
+            var k2 = Checksum.Mod11(value, K2Weights);
+            if (k2 == 10 || k2 != GetDigit(value[10]))
             {
                 error = ParseError.InvalidChecksum;
                 return false;
             }
 
-            var k1 = Checksum.Mod11(digits, K1Weights);
-            if (k1 == 10 || k1 != digits[9])
+            var k1 = Checksum.Mod11(value, K1Weights);
+            if (k1 == 10 || k1 != GetDigit(value[9]))
             {
                 error = ParseError.InvalidChecksum;
                 return false;
             }
 
-            var individual = digits[8] + (digits[7] * 10) + (digits[6] * 100);
-            var year = digits[5] + (digits[4] * 10);
+            var individual = ReadThreeDecimalDigits(value, 6);
+            var year = ReadTwoDecimalDigits(value, 4);
 
             var fullYear = GetFullYear(year, individual);
             if (!fullYear.HasValue)
@@ -191,8 +178,8 @@ namespace Redskap
                 return false;
             }
 
-            var month = digits[3] + (digits[2] * 10);
-            var day = digits[1] + (digits[0] * 10);
+            var month = ReadTwoDecimalDigits(value, 2);
+            var day = ReadTwoDecimalDigits(value, 0);
 
             var dateOfBirth = GetDateOfBirth(fullYear.Value, month, day, out var kind, out error);
             if (!dateOfBirth.HasValue)
@@ -269,7 +256,7 @@ namespace Redskap
                 }
 
                 error = default;
-                return new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Local);
+                return new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
             }
         }
 
@@ -283,11 +270,6 @@ namespace Redskap
             /// length, which should be 11 characters.
             /// </summary>
             InvalidLength,
-
-            /// <summary>
-            /// The parser encountered a non-digit character.
-            /// </summary>
-            InvalidCharacter,
 
             /// <summary>
             /// One of the two checksum digits did not match the rest of the number.

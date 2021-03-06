@@ -10,7 +10,7 @@ namespace Redskap
     {
         private IdentificationNumber(DateTime dateOfBirth, int individualNumber, int checkDigits, Kind kind)
         {
-            DateOfBirth = dateOfBirth;
+            DateOfBirth = DateTime.SpecifyKind(dateOfBirth.Date, DateTimeKind.Utc);
             IndividualNumber = individualNumber;
             CheckDigits = checkDigits;
             NumberKind = kind;
