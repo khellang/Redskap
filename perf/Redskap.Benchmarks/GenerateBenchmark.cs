@@ -7,12 +7,10 @@ namespace Redskap.Benchmarks
 {
     public class GenerateBenchmark
     {
-        private static readonly IdentificationNumber.Generator RedskapGen = new(new Random());
-
         [Benchmark(Baseline = true)]
         public IdentificationNumber Redskap()
         {
-            return RedskapGen.Generate(IdentificationNumber.Kind.FNumber, DateTime.Now);
+            return IdentificationNumber.Generate(IdentificationNumber.Kind.FNumber, DateTime.Now);
         }
 
         [Benchmark]
