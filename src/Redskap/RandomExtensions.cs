@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Redskap
@@ -15,7 +16,7 @@ namespace Redskap
             return minValue.AddDays(random.Next((maxValue - minValue).Days + 1));
         }
 
-        internal static IEnumerable<int> GetIndividualNumbers(this Random random, int year)
+        internal static RandomRangeEnumerator GetIndividualNumbers(this Random random, int year)
         {
             if (year < 1854)
             {
@@ -49,11 +50,44 @@ namespace Redskap
             throw new ArgumentException($"Invalid year: {year}", nameof(year));
         }
 
-        private static IEnumerable<int> GetRange(this Random random, int minValue, int maxValue)
+        private static RandomRangeEnumerator GetRange(this Random random, int minValue, int maxValue)
         {
-            while (true)
+            return new(random, minValue, maxValue);
+        }
+
+        public struct RandomRangeEnumerator : IEnumerable<int>, IEnumerator<int>
+        {
+            public RandomRangeEnumerator(Random random, int minValue, int maxValue)
             {
-                yield return random.Next(minValue, maxValue + 1);
+                Random = random;
+                MinValue = minValue;
+                MaxValue = maxValue;
+            }
+
+            private Random Random { get; }
+
+            private int MinValue { get; }
+
+            private int MaxValue { get; }
+
+            public int Current => Random.Next(MinValue, MaxValue + 1);
+
+            object IEnumerator.Current => Current;
+
+            public IEnumerator<int> GetEnumerator() => this;
+
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+            public bool MoveNext() => true;
+
+            public void Reset()
+            {
+                // Not supported.
+            }
+
+            public void Dispose()
+            {
+                // Not supported.
             }
         }
     }
