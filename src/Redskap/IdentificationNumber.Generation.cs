@@ -1,4 +1,5 @@
 using System;
+using static Redskap.FormattingHelpers;
 
 namespace Redskap
 {
@@ -164,7 +165,7 @@ namespace Redskap
                         continue;
                     }
 
-                    FormattingHelpers.WriteThreeDecimalDigits((uint) individualNumber, buffer, 6);
+                    WriteThreeDecimalDigits((uint) individualNumber, buffer, 6);
 
                     if (HasValidCheckDigits(buffer, out var checkDigits))
                     {
@@ -185,7 +186,7 @@ namespace Redskap
                     return false;
                 }
 
-                buffer[9] = FormattingHelpers.GetChar(k1); // Ugh, this feels yucky :(
+                buffer[9] = GetChar(k1); // Ugh, this feels yucky :(
 
                 var k2 = Checksum.Mod11(buffer, K2Weights);
                 if (k2 == 10)

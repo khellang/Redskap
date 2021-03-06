@@ -1,4 +1,5 @@
 using System;
+using static Redskap.FormattingHelpers;
 
 namespace Redskap
 {
@@ -23,8 +24,8 @@ namespace Redskap
 
         private static void Format(IdentificationNumber number, Span<char> buffer)
         {
-            FormattingHelpers.WriteTwoDecimalDigits((uint) number.CheckDigits, buffer, 9);
-            FormattingHelpers.WriteThreeDecimalDigits((uint) number.IndividualNumber, buffer, 6);
+            WriteTwoDecimalDigits((uint) number.CheckDigits, buffer, 9);
+            WriteThreeDecimalDigits((uint) number.IndividualNumber, buffer, 6);
             WriteDateOfBirth(buffer, number.DateOfBirth, number.NumberKind);
         }
 
@@ -44,7 +45,7 @@ namespace Redskap
                 day += 40;
             }
 
-            FormattingHelpers.WriteTwoDecimalDigits((uint) day, destination, 0);
+            WriteTwoDecimalDigits((uint) day, destination, 0);
         }
 
         private static void WriteMonth(Span<char> destination, DateTime dateOfBirth, Kind kind)
@@ -56,12 +57,12 @@ namespace Redskap
                 month += 40;
             }
 
-            FormattingHelpers.WriteTwoDecimalDigits((uint) month, destination, 2);
+            WriteTwoDecimalDigits((uint) month, destination, 2);
         }
 
         private static void WriteYear(Span<char> destination, DateTime dateOfBirth)
         {
-            FormattingHelpers.WriteTwoDecimalDigits((uint) dateOfBirth.Year % 100, destination, 4);
+            WriteTwoDecimalDigits((uint) dateOfBirth.Year % 100, destination, 4);
         }
     }
 }
