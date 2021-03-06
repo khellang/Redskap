@@ -207,7 +207,7 @@ namespace Redskap
             }
 
             // 500–999 omfatter personer født i perioden 2000–2039.
-            if (year < 40)
+            if (year <= 39)
             {
                 return 2000 + year;
             }

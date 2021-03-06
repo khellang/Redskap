@@ -28,14 +28,14 @@ namespace Redskap
                 return random.GetRange(500, 749);
             }
 
-            if (year <= 1939)
-            {
-                // 900–999 omfatter personer født i perioden 1940–1999.
-                return random.GetRange(900, 999);
-            }
-
             if (year <= 1999)
             {
+                if (year >= 1940)
+                {
+                    // 900–999 omfatter personer født i perioden 1940–1999.
+                    return random.GetRange(900, 999);
+                }
+
                 // 000–499 omfatter personer født i perioden 1900–1999.
                 return random.GetRange(0, 499);
             }
