@@ -34,8 +34,8 @@ If you want to control the randomness of the generation, e.g. for unit testing, 
 
 The results of the [`GenerateBenchmark`](https://github.com/khellang/Redskap/blob/b2b6ae87542825d379793ef6c8b1508012786616/perf/Redskap.Benchmarks/GenerateBenchmark.cs):
 
-|    Method |           Mean |        Error |       StdDev |    Ratio | RatioSD |    Gen 0 | Gen 1 | Gen 2 | Allocated |
-|---------- |---------------:|-------------:|-------------:|---------:|--------:|---------:|------:|------:|----------:|
-|   Redskap |       410.6 ns |      1.41 ns |      1.25 ns |     1.00 |    0.00 |   0.0100 |     - |     - |      32 B |
-| NoCommons | 4,038,315.0 ns | 41,735.70 ns | 39,039.60 ns | 9,833.87 |   99.19 | 195.3125 |     - |     - |  622210 B |
-| NinEngine |     2,722.1 ns |     54.19 ns |     60.23 ns |     6.67 |    0.15 |   0.9766 |     - |     - |    3075 B |
+|    Method |           Mean |       Error |      StdDev |    Ratio | RatioSD |   Gen 0 |  Gen 1 | Gen 2 | Allocated |
+|---------- |---------------:|------------:|------------:|---------:|--------:|--------:|-------:|------:|----------:|
+|   Redskap |       330.1 ns |     2.09 ns |     1.96 ns |     1.00 |    0.00 |       - |      - |     - |         - |
+| NoCommons | 2,209,231.3 ns | 4,376.61 ns | 4,093.88 ns | 6,692.56 |   41.77 | 74.2188 | 7.8125 |     - |  622208 B |
+| NinEngine |     2,427.4 ns |    10.81 ns |    10.11 ns |     7.35 |    0.07 |  0.3662 |      - |     - |    3072 B |

@@ -1,16 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap", "src\Redskap\Redskap.csproj", "{B87AB186-87F4-4E75-9850-1E3AFC4728B0}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redskap", "src\Redskap\Redskap.csproj", "{B87AB186-87F4-4E75-9850-1E3AFC4728B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{946C0D30-9768-4165-BD94-693BBAA1F9A2}"
-ProjectSection(SolutionItems) = preProject
-	global.json = global.json
-	Directory.Build.props = Directory.Build.props
-	.gitignore = .gitignore
-	README.md = README.md
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		global.json = global.json
+		README.md = README.md
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap.Tests", "test\Redskap.Tests\Redskap.Tests.csproj", "{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redskap.Tests", "test\Redskap.Tests\Redskap.Tests.csproj", "{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{128004B2-9CFF-4A8D-8E34-FF58CE591952}"
 EndProject
@@ -18,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1E95080C-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "perf", "perf", "{1BBC2CEF-9900-4D13-94AA-9FBE34D7F8FD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap.Benchmarks", "perf\Redskap.Benchmarks\Redskap.Benchmarks.csproj", "{F0AF553F-48F6-480D-9CED-81FEE7333993}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Redskap.Benchmarks", "perf\Redskap.Benchmarks\Redskap.Benchmarks.csproj", "{F0AF553F-48F6-480D-9CED-81FEE7333993}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +42,15 @@ Global
 		{F0AF553F-48F6-480D-9CED-81FEE7333993}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F0AF553F-48F6-480D-9CED-81FEE7333993}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B87AB186-87F4-4E75-9850-1E3AFC4728B0} = {128004B2-9CFF-4A8D-8E34-FF58CE591952}
 		{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F} = {1E95080C-8AE0-4F3A-8F79-344F5B345245}
 		{F0AF553F-48F6-480D-9CED-81FEE7333993} = {1BBC2CEF-9900-4D13-94AA-9FBE34D7F8FD}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBADCB58-6204-48C2-AD89-140D31401308}
 	EndGlobalSection
 EndGlobal

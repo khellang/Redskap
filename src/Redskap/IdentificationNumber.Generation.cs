@@ -158,8 +158,12 @@ namespace Redskap
 
                 WriteDateOfBirth(buffer, dateOfBirth, kind);
 
-                foreach (var individualNumber in Random.GetIndividualNumbers(dateOfBirth.Year))
+                var enumerator = Random.GetIndividualNumbers(dateOfBirth.Year);
+
+                while (enumerator.MoveNext())
                 {
+                    var individualNumber = enumerator.Current;
+
                     if (GetGender(individualNumber) != gender)
                     {
                         continue;

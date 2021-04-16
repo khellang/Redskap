@@ -55,7 +55,7 @@ namespace Redskap
             return new(random, minValue, maxValue);
         }
 
-        public struct RandomRangeEnumerator : IEnumerable<int>, IEnumerator<int>
+        public readonly struct RandomRangeEnumerator : IEnumerable<int>, IEnumerator<int>
         {
             public RandomRangeEnumerator(Random random, int minValue, int maxValue)
             {
