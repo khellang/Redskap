@@ -1,4 +1,4 @@
-# Redskap
+# 🇳🇴 Redskap
 
 Currently there's only one utility in the library, `IdentificationNumber`, which lets you parse, validate and generate Norwegian National Identity Numbers. More utilities are coming!
 
