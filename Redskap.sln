@@ -7,6 +7,7 @@ ProjectSection(SolutionItems) = preProject
 	global.json = global.json
 	Directory.Build.props = Directory.Build.props
 	.gitignore = .gitignore
+	README.md = README.md
 EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Redskap.Tests", "test\Redskap.Tests\Redskap.Tests.csproj", "{B8B85DEB-E275-4F24-83AA-AD5AFB80F08F}"
