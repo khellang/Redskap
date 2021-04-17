@@ -60,6 +60,15 @@
     <Compile Update="MaleNames.cs">
       <DependentUpon>MaleNames.tt</DependentUpon>
     </Compile>
+    <None Update="PostCodes.g.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PostCodes.g.cs</LastGenOutput>
+    </None>
+    <Compile Update="PostCodes.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostCodes.g.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
