@@ -39,6 +39,27 @@
     <Compile Update="IdentificationNumber.Parsing.netstandard.cs">
       <DependentUpon>IdentificationNumber.Parsing.cs</DependentUpon>
     </Compile>
+    <None Update="FamilyNames.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FamilyNames.cs</LastGenOutput>
+    </None>
+    <Compile Update="FamilyNames.cs">
+      <DependentUpon>FamilyNames.tt</DependentUpon>
+    </Compile>
+    <None Update="FemaleNames.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>FemaleNames.cs</LastGenOutput>
+    </None>
+    <Compile Update="FemaleNames.cs">
+      <DependentUpon>FemaleNames.tt</DependentUpon>
+    </Compile>
+    <None Update="MaleNames.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MaleNames.cs</LastGenOutput>
+    </None>
+    <Compile Update="MaleNames.cs">
+      <DependentUpon>MaleNames.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

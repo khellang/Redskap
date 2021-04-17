@@ -1,0 +1,3 @@
+<#@ template language="C#" #>
+<#@ include file="NameFunctions.ttinclude" #>
+<# GenerateClass("MaleNames", "Data/male-names.csv", 0); #>
