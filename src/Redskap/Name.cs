@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 
 namespace Redskap
 {
@@ -46,6 +45,16 @@ namespace Redskap
         /// </summary>
         public class Generator
         {
+            private const double FemaleMultipleGivenNamesPercent = 22.8;
+
+            private const double MaleMultipleGivenNamesPercent = 19.0;
+
+            private const double HyphenatedGivenNamesPercent = 0.8;
+
+            private const double MultipleFamilyNamesPercent = 11.5;
+
+            private const double HyphenatedFamilyNamesPercent = 8.4;
+
             /// <summary>
             /// Creates a new <see cref="Generator"/> instance using
             /// the specified <paramref name="random"/> number generator.
@@ -59,7 +68,8 @@ namespace Redskap
             /// Generates a random Norwegian family name.
             /// </summary>
             /// <returns>A random Norwegian family name.</returns>
-            public string GenerateFamilyName() => GetName(FamilyNames.All);
+            public string GenerateFamilyName() =>
+                GetName(FamilyNames.All, MultipleFamilyNamesPercent, HyphenatedFamilyNamesPercent);
 
             /// <summary>
             /// Generates a random Norwegian given name.
@@ -74,8 +84,8 @@ namespace Redskap
             /// <returns>A random Norwegian given name for specified <paramref name="gender"/>.</returns>
             public string GenerateGivenName(Gender gender) => gender switch
             {
-                Gender.Female => GetName(FemaleNames.All),
-                Gender.Male => GetName(MaleNames.All),
+                Gender.Female => GetName(FemaleNames.All, FemaleMultipleGivenNamesPercent, HyphenatedGivenNamesPercent),
+                Gender.Male => GetName(MaleNames.All, MaleMultipleGivenNamesPercent, HyphenatedGivenNamesPercent),
                 _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
             };
 
@@ -91,8 +101,54 @@ namespace Redskap
             /// <returns>A random Norwegian full name for specified <paramref name="gender"/>.</returns>
             public string GenerateFullName(Gender gender) => $"{GenerateGivenName(gender)} {GenerateFamilyName()}";
 
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            private string GetName(string[] names, double multipleNamesPercent, double hyphenatedPercent)
+            {
+                if (!UseMultipleNames(multipleNamesPercent, hyphenatedPercent, out var hyphenated))
+                {
+                    return GetName(names);
+                }
+
+                var first = GetName(names);
+
+                if (first.Contains("-"))
+                {
+                    return first;
+                }
+
+                var second = GetName(names);
+
+                if (second.Contains("-"))
+                {
+                    return second;
+                }
+
+                var separator = hyphenated ? '-' : ' ';
+
+                return $"{first}{separator}{second}";
+
+            }
+
             private string GetName(string[] names) => names[Random.Next(names.Length)];
+
+            private bool UseMultipleNames(double percent, double hyphenatedPercent, out bool hyphenated)
+            {
+                var number = Random.NextDouble() * 100;
+
+                if (number < hyphenatedPercent)
+                {
+                    hyphenated = true;
+                    return true;
+                }
+
+                if (number < percent)
+                {
+                    hyphenated = false;
+                    return true;
+                }
+
+                hyphenated = false;
+                return false;
+            }
         }
     }
 }
