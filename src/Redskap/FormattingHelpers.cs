@@ -7,10 +7,7 @@ namespace Redskap
     internal static class FormattingHelpers
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static char GetChar(uint digit)
-        {
-            return (char) ('0' + digit);
-        }
+        internal static char GetChar(uint digit) => (char) ('0' + digit);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void WriteTwoDecimalDigits(uint value, Span<char> destination, int offset)
