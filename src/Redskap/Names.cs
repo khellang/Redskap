@@ -45,15 +45,15 @@ namespace Redskap
         /// </summary>
         public class Generator
         {
-            private const double FemaleMultipleGivenNamesPercent = 22.8;
+            private const double FemaleMultipleGivenNamesPercent = 0.228;
 
-            private const double MaleMultipleGivenNamesPercent = 19.0;
+            private const double MaleMultipleGivenNamesPercent = 0.190;
 
-            private const double HyphenatedGivenNamesPercent = 0.8;
+            private const double HyphenatedGivenNamesPercent = 0.008;
 
-            private const double MultipleFamilyNamesPercent = 11.5;
+            private const double MultipleFamilyNamesPercent = 0.115;
 
-            private const double HyphenatedFamilyNamesPercent = 8.4;
+            private const double HyphenatedFamilyNamesPercent = 0.084;
 
             /// <summary>
             /// Creates a new <see cref="Generator"/> instance using
@@ -132,7 +132,7 @@ namespace Redskap
 
             private bool UseMultipleNames(double percent, double hyphenatedPercent, out bool hyphenated)
             {
-                var number = Random.NextDouble() * 100;
+                var number = Random.NextDouble();
 
                 if (number < hyphenatedPercent)
                 {
