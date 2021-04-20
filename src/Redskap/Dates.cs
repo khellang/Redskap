@@ -109,7 +109,6 @@ namespace Redskap
                 return new HashSet<Holiday>(DateOnlyEqualityComparer.Instance)
                 {
                     new(year, 1, 1, "Første nyttårsdag", "New Year's Day"),
-                    new(easterSunday.AddDays(-7), "Palmesøndag", "Palm Sunday"),
                     new(easterSunday.AddDays(-3), "Skjærtorsdag", "Maundy Thursday"),
                     new(easterSunday.AddDays(-2), "Langfredag", "Good Friday"),
                     new(easterSunday, "Første påskedag", "Easter Sunday"),
