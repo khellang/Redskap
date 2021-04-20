@@ -46,21 +46,11 @@ namespace Redskap
         /// <inheritdoc />
         public override int GetHashCode() => PostCode.GetHashCode();
 
-        /// <summary>
-        /// Compares two instances of <see cref="PostCodeInfo"/> for equality.
-        /// </summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand.</param>
-        /// <returns><see langword="true"/> if the post codes are equal; otherwise, <see langword="false"/>.</returns>
+#pragma warning disable 1591
         public static bool operator ==(PostCodeInfo left, PostCodeInfo right) => left.Equals(right);
 
-        /// <summary>
-        /// Compares two instances of <see cref="PostCodeInfo"/> for inequality.
-        /// </summary>
-        /// <param name="left">The left operand.</param>
-        /// <param name="right">The right operand.</param>
-        /// <returns><see langword="true"/> if the post codes are not equal; otherwise, <see langword="false"/>.</returns>
         public static bool operator !=(PostCodeInfo left, PostCodeInfo right) => !left.Equals(right);
+#pragma warning restore 1591
 
         /// <inheritdoc />
         public override string ToString() => $"{PostCode} {PostalName}";
