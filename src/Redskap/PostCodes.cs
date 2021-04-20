@@ -11,14 +11,22 @@ namespace Redskap
         /// Gets all the mapped post codes from Bring's post code register.
         /// </summary>
         /// <returns>All the mapped post codes from Bring's post code register.</returns>
-        public static IEnumerable<PostCodeInfo> GetAll() => Map.Select(p => new PostCodeInfo(p.Key, p.Value));
+        public static IReadOnlyCollection<PostCodeInfo> GetAll() => Map.Select(p => new PostCodeInfo(p.Key, p.Value)).ToArray();
 
         /// <summary>
         /// Checks whether the specified <paramref name="postCode"/> is valid and in use.
         /// </summary>
         /// <param name="postCode">The post code to validate.</param>
         /// <returns><see langword="true"/> if the post code is valid; otherwise, <see langword="false"/>.</returns>
-        public static bool IsValid(string postCode) => Map.ContainsKey(postCode);
+        public static bool IsValid(string postCode)
+        {
+            if (postCode is null)
+            {
+                throw new ArgumentNullException(nameof(postCode));
+            }
+
+            return Map.ContainsKey(postCode);
+        }
 
         /// <summary>
         /// Attempts to get a mapped postal name for the specified <paramref name="postCode"/>.
@@ -31,11 +39,6 @@ namespace Redskap
             if (postCode is null)
             {
                 throw new ArgumentNullException(nameof(postCode));
-            }
-
-            if (postCode.Length != 4)
-            {
-                throw new FormatException($"The post code '{postCode}' has an invalid length. Expected 4 characters.");
             }
 
             return Map.TryGetValue(postCode, out postalName);
