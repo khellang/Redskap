@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    <PackageReference Include="Nager.Date" Version="1.28.2" />
     <PackageReference Include="NoCommons" Version="2.0.0" />
     <PackageReference Include="Nonin" Version="1.0.0.3" />
     <PackageReference Include="nor-id-num" Version="1.0.6" />
