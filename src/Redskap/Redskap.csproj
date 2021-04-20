@@ -19,7 +19,10 @@
 
     <Description>A collection of blazing fast Norwegian utilities with a modern API. These include:
 
-    Generating, parsing and validating Norwegian identification numbers, such as F-, D- and H-numbers.</Description>
+    - Generating, parsing and validating Norwegian identification numbers, such as F-, D- and H-numbers.
+    - Working with Norwegian holidays and dates.
+    - Generating Norwegian authentic given- and family names.
+    - Validating and listing Norwegian post codes.</Description>
     <PackageTags>norway;norwegian;fødselsnummer;personnummer;parser;validator</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Kristian Hellang</Authors>
