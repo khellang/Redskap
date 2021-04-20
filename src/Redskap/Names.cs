@@ -5,7 +5,7 @@ namespace Redskap
     /// <summary>
     /// Utility for generating random Norwegian names.
     /// </summary>
-    public static class Name
+    public static class Names
     {
         private static readonly Generator Gen = new(new Random());
 
