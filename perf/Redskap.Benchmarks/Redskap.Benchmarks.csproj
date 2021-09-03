@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net472;net5.0</TargetFrameworks>
     <IsPackable>False</IsPackable>
     <OutputType>Exe</OutputType>
     <NoWarn>NU1701</NoWarn>
