@@ -48,6 +48,8 @@
     </None>
     <Compile Update="FamilyNames.cs">
       <DependentUpon>FamilyNames.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <None Update="FemaleNames.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -55,6 +57,8 @@
     </None>
     <Compile Update="FemaleNames.cs">
       <DependentUpon>FemaleNames.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <None Update="MaleNames.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -62,6 +66,8 @@
     </None>
     <Compile Update="MaleNames.cs">
       <DependentUpon>MaleNames.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
     <None Update="PostCodes.g.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -86,5 +92,9 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="MinVer" Version="2.5.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 </Project>
