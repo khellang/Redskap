@@ -5,7 +5,11 @@ namespace Redskap
 {
     public readonly partial struct IdentificationNumber
     {
+#if NET6_0_OR_GREATER
+        private static readonly Generator Gen = new(Random.Shared);
+#else
         private static readonly Generator Gen = new(new Random());
+#endif
 
         /// <summary>
         /// Generates a valid <see cref="IdentificationNumber"/> of the specified <paramref name="kind"/>.

@@ -7,7 +7,11 @@ namespace Redskap
     /// </summary>
     public static class Names
     {
+#if NET6_0_OR_GREATER
+        private static readonly Generator Gen = new(Random.Shared);
+#else
         private static readonly Generator Gen = new(new Random());
+#endif
 
         /// <summary>
         /// Generates a random Norwegian family name.
