@@ -12,8 +12,8 @@
 
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
-    <PackageReference Include="Nager.Date" Version="1.29.2" />
-    <PackageReference Include="NoCommons" Version="2.0.0" />
+    <PackageReference Include="Nager.Date" Version="1.30.0" />
+    <PackageReference Include="NoCommons" Version="2.0.1" />
     <PackageReference Include="Nonin" Version="1.0.0.3" />
     <PackageReference Include="nor-id-num" Version="1.0.6" />
     <PackageReference Include="Tedd.Fodselsnummer" Version="1.0.0" />
