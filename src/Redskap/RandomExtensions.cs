@@ -65,20 +65,23 @@ namespace Redskap
                 seed = ++seed % count;
             }
 
-            return new RandomRangeEnumerator(minValue, seed, count);
+            return new RandomRangeEnumerator(minValue, maxValue, seed, count);
         }
 
         public struct RandomRangeEnumerator : IEnumerable<int>, IEnumerator<int>
         {
-            public RandomRangeEnumerator(int minValue, int seed, int count)
+            public RandomRangeEnumerator(int minValue, int maxValue, int seed, int count)
             {
                 MinValue = minValue;
+                MaxValue = maxValue;
                 Seed = seed;
                 Count = count;
                 Index = 0;
             }
 
-            private int MinValue { get; }
+            public int MinValue { get; }
+
+            public int MaxValue { get; }
 
             private int Seed { get; }
 
