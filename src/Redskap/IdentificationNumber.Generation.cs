@@ -5,6 +5,16 @@ namespace Redskap
 {
     public readonly partial struct IdentificationNumber
     {
+        /// <summary>
+        /// Represents the earliest valid year of birth.
+        /// </summary>
+        public const int MinYear = 1854;
+
+        /// <summary>
+        /// Represents the latest valid year of birth.
+        /// </summary>
+        public const int MaxYear = 2039;
+
 #if NET6_0_OR_GREATER
         private static readonly Generator Gen = new(Random.Shared);
 #else
@@ -81,9 +91,9 @@ namespace Redskap
         /// </summary>
         public class Generator
         {
-            private static readonly DateTime MaxValue = new(2039, 12, 31);
+            private static readonly DateTime MinValue = new(MinYear, 1, 1);
 
-            private static readonly DateTime MinValue = new(1854, 1, 1);
+            private static readonly DateTime MaxValue = new(MaxYear, 12, 31);
 
             /// <summary>
             /// Creates a new <see cref="Generator"/> instance using

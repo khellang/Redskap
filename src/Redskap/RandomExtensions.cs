@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using static Redskap.IdentificationNumber;
 
 namespace Redskap
 {
@@ -18,9 +19,9 @@ namespace Redskap
 
         internal static RandomRangeEnumerator GetIndividualNumbers(this Random random, Gender gender, int year)
         {
-            if (year < 1854)
+            if (year < MinYear)
             {
-                throw new ArgumentException($"Invalid year: {year}", nameof(year));
+                throw new ArgumentException($"Year {year} is earlier than the minimum year {MinYear}.", nameof(year));
             }
 
             if (year <= 1899)
@@ -41,13 +42,13 @@ namespace Redskap
                 return random.GetRange(gender, 0, 499);
             }
 
-            if (year <= 2039)
+            if (year <= MaxYear)
             {
                 // 500–999 omfatter personer født i perioden 2000–2039.
                 return random.GetRange(gender, 500, 999);
             }
 
-            throw new ArgumentException($"Invalid year: {year}", nameof(year));
+            throw new ArgumentException($"Year {year} is later than the maximum year {MaxYear}.", nameof(year));
         }
 
         private static RandomRangeEnumerator GetRange(this Random random, Gender gender, int minValue, int maxValue)
