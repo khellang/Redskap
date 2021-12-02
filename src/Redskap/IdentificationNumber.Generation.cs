@@ -162,16 +162,11 @@ namespace Redskap
 
                 WriteDateOfBirth(buffer, dateOfBirth, kind);
 
-                var enumerator = Random.GetIndividualNumbers(dateOfBirth.Year);
+                var enumerator = Random.GetIndividualNumbers(gender, dateOfBirth.Year);
 
                 while (enumerator.MoveNext())
                 {
                     var individualNumber = enumerator.Current;
-
-                    if (GetGender(individualNumber) != gender)
-                    {
-                        continue;
-                    }
 
                     WriteThreeDecimalDigits((uint) individualNumber, buffer, 6);
 
