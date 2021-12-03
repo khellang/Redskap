@@ -12,6 +12,13 @@ namespace Redskap
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        internal static bool TryGetDigit(char c, out byte digit)
+        {
+            digit = GetDigit(c);
+            return digit is >= 0 and <= 9;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static int ReadTwoDecimalDigits(ReadOnlySpan<char> source, int offset)
         {
             return GetDigit(source[offset + 1])

@@ -26,18 +26,19 @@ namespace Redskap.Tests
         }
 
         [Theory]
-        [InlineData("0123456789", "For kort")]
-        [InlineData("012345678910", "For langt")]
-        [InlineData("abcdefghijk", "Ugyldig tegn")]
-        [InlineData("01015780000", "Ugyldig individnummer")]
-        [InlineData("01130400000", "Ugyldig måned (maks)")]
-        [InlineData("01000400000", "Ugyldig måned (min)")]
-        [InlineData("00120467800", "Ugyldig dag (maks)")]
-        [InlineData("32120400000", "Ugyldig dag (min)")]
-        [InlineData("01010101010", "Feil kontrollsiffer")]
-        public void TryParse_Invalid_Returns_False(string identityNumber, string description)
+        [InlineData("0123456789", ParseError.InvalidLength)] // For kort
+        [InlineData("012345678910", ParseError.InvalidLength)] // For langt
+        [InlineData("abcdefghijk", ParseError.InvalidCharacter)] // Ugyldig tegn
+        [InlineData("01015780000", ParseError.InvalidChecksum)] // Ugyldig individnummer
+        [InlineData("01130423880", ParseError.InvalidMonth)] // Ugyldig måned (maks)
+        [InlineData("01000434538", ParseError.InvalidMonth)] // Ugyldig måned (min)
+        [InlineData("00120467824", ParseError.InvalidDayOfMonth)] // Ugyldig dag (maks)
+        [InlineData("32120432426", ParseError.InvalidDayOfMonth)] // Ugyldig dag (min)
+        [InlineData("01010101010", ParseError.InvalidChecksum)] // Feil kontrollsiffer
+        public void TryParse_Invalid_Returns_False(string identityNumber, ParseError expectedError)
         {
-            Assert.False(TryParse(identityNumber, out _), description);
+            Assert.False(TryParse(identityNumber, out _, out var error));
+            Assert.Equal(expectedError, error);
         }
 
         [Fact]

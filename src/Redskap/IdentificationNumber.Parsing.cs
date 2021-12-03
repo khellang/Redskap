@@ -155,14 +155,38 @@ namespace Redskap
             }
 
             var k2 = Checksum.Mod11(value, K2Weights);
-            if (k2 == 10 || k2 != GetDigit(value[10]))
+            if (k2 == 10)
+            {
+                error = ParseError.InvalidChecksum;
+                return false;
+            }
+
+            if (!TryGetDigit(value[10], out var k2Digit))
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
+
+            if (k2Digit != k2)
             {
                 error = ParseError.InvalidChecksum;
                 return false;
             }
 
             var k1 = Checksum.Mod11(value, K1Weights);
-            if (k1 == 10 || k1 != GetDigit(value[9]))
+            if (k1 == 10)
+            {
+                error = ParseError.InvalidChecksum;
+                return false;
+            }
+
+            if (!TryGetDigit(value[9], out var k1Digit))
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
+
+            if (k1Digit != k1)
             {
                 error = ParseError.InvalidChecksum;
                 return false;
@@ -289,7 +313,12 @@ namespace Redskap
             /// <summary>
             /// An invalid day of month was specified.
             /// </summary>
-            InvalidDayOfMonth
+            InvalidDayOfMonth,
+
+            /// <summary>
+            /// The identification number contains an invalid character.
+            /// </summary>
+            InvalidCharacter
         }
     }
 }
