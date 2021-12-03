@@ -19,18 +19,32 @@ namespace Redskap
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int ReadTwoDecimalDigits(ReadOnlySpan<char> source, int offset)
+        internal static bool TryReadTwoDecimalDigits(ReadOnlySpan<char> source, int offset, out int digit)
         {
-            return GetDigit(source[offset + 1])
-                + (GetDigit(source[offset + 0]) * 10);
+            if (TryGetDigit(source[offset + 1], out var first) &&
+                TryGetDigit(source[offset + 0], out var second))
+            {
+                digit = first + (second * 10);
+                return true;
+            }
+
+            digit = default;
+            return false;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static int ReadThreeDecimalDigits(ReadOnlySpan<char> source, int offset)
+        internal static bool TryReadThreeDecimalDigits(ReadOnlySpan<char> source, int offset, out int digit)
         {
-            return GetDigit(source[offset + 2])
-                + (GetDigit(source[offset + 1]) * 10)
-                + (GetDigit(source[offset + 0]) * 100);
+            if (TryGetDigit(source[offset + 2], out var a) &&
+                TryGetDigit(source[offset + 1], out var b) &&
+                TryGetDigit(source[offset + 0], out var c))
+            {
+                digit = a + (b * 10) + (c * 100);
+                return true;
+            }
+
+            digit = default;
+            return false;
         }
     }
 }

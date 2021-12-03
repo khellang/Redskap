@@ -192,8 +192,17 @@ namespace Redskap
                 return false;
             }
 
-            var individual = ReadThreeDecimalDigits(value, 6);
-            var year = ReadTwoDecimalDigits(value, 4);
+            if (!TryReadThreeDecimalDigits(value, 6, out var individual))
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
+
+            if (!TryReadTwoDecimalDigits(value, 4, out var year))
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
 
             var fullYear = GetFullYear(year, individual);
             if (!fullYear.HasValue)
@@ -202,8 +211,17 @@ namespace Redskap
                 return false;
             }
 
-            var month = ReadTwoDecimalDigits(value, 2);
-            var day = ReadTwoDecimalDigits(value, 0);
+            if (!TryReadTwoDecimalDigits(value, 2, out var month))
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
+
+            if (!TryReadTwoDecimalDigits(value, 0, out var day))
+            {
+                error = ParseError.InvalidCharacter;
+                return false;
+            }
 
             var dateOfBirth = GetDateOfBirth(fullYear.Value, month, day, out var kind, out error);
             if (!dateOfBirth.HasValue)
