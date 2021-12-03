@@ -285,7 +285,7 @@ namespace Redskap
                 // There's no point in validating year, as any non-null
                 // result from GetFullYear should be a valid year.
 
-                if (month < 1 || month > 12)
+                if (month is < 1 or > 12)
                 {
                     error = ParseError.InvalidMonth;
                     return null;
