@@ -114,14 +114,14 @@ namespace Redskap
 
                 var first = GetName(names);
 
-                if (first.Contains("-"))
+                if (first.Contains('-'))
                 {
                     return first;
                 }
 
                 var second = GetName(names);
 
-                if (second.Contains("-"))
+                if (second.Contains('-'))
                 {
                     return second;
                 }

@@ -14,7 +14,9 @@
                 continue;
             }
             
-            var name = line.Split('\t')[0];
+            var parts = line.Split('\t');
+
+            var name = parts[0];
 
             if (name.Length > 3)
             {
