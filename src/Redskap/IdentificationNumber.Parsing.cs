@@ -212,16 +212,34 @@ namespace Redskap
                 return false;
             }
 
-            var fullYear = GetFullYear(year, individual);
-            if (!fullYear.HasValue)
+            var century = GetCentury(year, individual);
+            if (!century.HasValue)
             {
                 error = ParseError.InvalidYear;
                 return false;
             }
 
+            // There's no need to validate year, as any non-null
+            // result from GetCentury should result in a valid year.
+            year += century.Value;
+
             if (!TryReadTwoDecimalDigits(value, 2, out var month))
             {
                 error = ParseError.InvalidCharacter;
+                return false;
+            }
+
+            var kind = Kind.FNumber;
+
+            if (month > DhNumberBase)
+            {
+                kind = Kind.HNumber; // H numbers get 40 added to the month.
+                month -= DhNumberBase;
+            }
+
+            if (month is < MinMonth or > MaxMonth)
+            {
+                error = ParseError.InvalidMonth;
                 return false;
             }
 
@@ -231,83 +249,51 @@ namespace Redskap
                 return false;
             }
 
-            var dateOfBirth = GetDateOfBirth(fullYear.Value, month, day, out var kind, out error);
-            if (!dateOfBirth.HasValue)
+            if (day > DhNumberBase)
             {
+                kind = Kind.DNumber; // D numbers get 40 added to the day.
+                day -= DhNumberBase;
+            }
+
+            if (day < MinDayOfMonth || day > DateTime.DaysInMonth(year, month))
+            {
+                error = ParseError.InvalidDayOfMonth;
                 return false;
             }
 
             var checkDigits = (k1 * 10) + k2;
-            result = new IdentificationNumber(dateOfBirth.Value, individual, checkDigits, kind);
+            var dateOfBirth = new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
+            result = new IdentificationNumber(dateOfBirth, individual, checkDigits, kind);
             return true;
         }
 
-        private static int? GetFullYear(int year, int individual)
+        private static int? GetCentury(int year, int individual)
         {
             // 000–499 omfatter personer født i perioden 1900–1999.
             if (individual <= 499)
             {
-                return 1900 + year;
+                return 1900;
             }
 
             // 500–749 omfatter personer født i perioden 1854–1899.
             if (individual <= 749 && year >= 54)
             {
-                return 1800 + year;
+                return 1800;
             }
 
             // 500–999 omfatter personer født i perioden 2000–2039.
             if (year <= 39)
             {
-                return 2000 + year;
+                return 2000;
             }
 
             // 900–999 omfatter personer født i perioden 1940–1999.
             if (individual >= 900)
             {
-                return 1900 + year;
+                return 1900;
             }
 
             return null;
-        }
-
-        private static DateTime? GetDateOfBirth(int year, int month, int day, out Kind kind, out ParseError error)
-        {
-            if (day > DhNumberBase)
-            {
-                kind = Kind.DNumber; // D numbers get 40 added to the day.
-                return GetDate(year, month, day - DhNumberBase, out error);
-            }
-
-            if (month > DhNumberBase)
-            {
-                kind = Kind.HNumber; // H numbers get 40 added to the month.
-                return GetDate(year, month - DhNumberBase, day, out error);
-            }
-
-            kind = Kind.FNumber;
-            return GetDate(year, month, day, out error);
-
-            static DateTime? GetDate(int year, int month, int day, out ParseError error)
-            {
-                // There's no point in validating year, as any non-null
-                // result from GetFullYear should be a valid year.
-
-                if (month is < MinMonth or > MaxMonth)
-                {
-                    error = ParseError.InvalidMonth;
-                    return null;
-                }
-
-                if (day < MinDayOfMonth || day > DateTime.DaysInMonth(year, month))
-                {
-                    error = ParseError.InvalidDayOfMonth;
-                    return null;
-                }
-
-                error = default;
-                return new DateTime(year, month, day, 0, 0, 0, DateTimeKind.Utc);
-            }
         }
 
         /// <summary>
