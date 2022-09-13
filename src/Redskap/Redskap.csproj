@@ -44,39 +44,44 @@
     </Compile>
     <None Update="FamilyNames.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FamilyNames.cs</LastGenOutput>
+      <LastGenOutput>FamilyNames.g.cs</LastGenOutput>
     </None>
-    <Compile Update="FamilyNames.cs">
-      <DependentUpon>FamilyNames.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <None Update="FemaleNames.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>FemaleNames.cs</LastGenOutput>
+      <LastGenOutput>FemaleNames.g.cs</LastGenOutput>
     </None>
-    <Compile Update="FemaleNames.cs">
-      <DependentUpon>FemaleNames.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
     <None Update="MaleNames.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MaleNames.cs</LastGenOutput>
+      <LastGenOutput>MaleNames.g.cs</LastGenOutput>
     </None>
-    <Compile Update="MaleNames.cs">
-      <DependentUpon>MaleNames.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <None Update="PostCodes.g.tt">
+    <None Update="PostCodes.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PostCodes.g.cs</LastGenOutput>
     </None>
     <Compile Update="PostCodes.g.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PostCodes.g.tt</DependentUpon>
+      <DependentUpon>PostCodes.tt</DependentUpon>
+    </Compile>
+    <Compile Update="PostCodes.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostCodes.tt</DependentUpon>
+    </Compile>
+    <Compile Update="MaleNames.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaleNames.tt</DependentUpon>
+    </Compile>
+    <Compile Update="FemaleNames.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FemaleNames.tt</DependentUpon>
+    </Compile>
+    <Compile Update="FamilyNames.g.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FamilyNames.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   

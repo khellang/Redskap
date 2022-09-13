@@ -1,4 +1,4 @@
 <#@ template language="C#" hostspecific="true" #>
-<#@ output extension=".cs" encoding="utf-8" #>
+<#@ output extension=".g.cs" encoding="utf-8" #>
 <#@ include file="NameFunctions.ttinclude" #>
-<# GenerateClass("FemaleNames", Host.ResolvePath("Data/female-names.csv"), 0); #>
+<# GenerateClass("FemaleNames", Host.ResolvePath("Data/female-names.csv")); #>
