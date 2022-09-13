@@ -22,10 +22,10 @@ namespace Redskap
     /// </remarks>
     public static partial class PostCodes
     {
-        private static readonly Dictionary<string, string> Map = new()
+        private static readonly Dictionary<short, string> Map = new()
         {
 <# foreach (var postCode in GetPostCodes()) { #>
-            { "<#= postCode.Value #>", "<#= postCode.PostalName #>" },
+            { <#= postCode.Value #>, "<#= postCode.PostalName #>" },
 <# } #>
         };
     }

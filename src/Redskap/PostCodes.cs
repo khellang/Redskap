@@ -25,7 +25,8 @@ namespace Redskap
                 throw new ArgumentNullException(nameof(postCode));
             }
 
-            return Map.ContainsKey(postCode);
+            return short.TryParse(postCode, out var postCodeNumber)
+                && Map.ContainsKey(postCodeNumber);
         }
 
         /// <summary>
@@ -41,7 +42,9 @@ namespace Redskap
                 throw new ArgumentNullException(nameof(postCode));
             }
 
-            return Map.TryGetValue(postCode, out postalName);
+            postalName = default;
+            return short.TryParse(postCode, out var postCodeNumber)
+                && Map.TryGetValue(postCodeNumber, out postalName);
         }
     }
 }
