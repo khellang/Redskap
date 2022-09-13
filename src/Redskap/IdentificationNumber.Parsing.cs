@@ -10,6 +10,14 @@ namespace Redskap
 
         private static ReadOnlySpan<byte> K1Weights => new byte[] { 3, 7, 6, 1, 8, 9, 4, 5, 2 };
 
+        private const int DhNumberBase = 40;
+
+        private const int MinDayOfMonth = 1;
+
+        private const int MinMonth = 1;
+
+        private const int MaxMonth = 12;
+
         private const int Length = 11;
 
         /// <summary>
@@ -265,16 +273,16 @@ namespace Redskap
 
         private static DateTime? GetDateOfBirth(int year, int month, int day, out Kind kind, out ParseError error)
         {
-            if (day > 40)
+            if (day > DhNumberBase)
             {
-                kind = Kind.DNumber;
-                return GetDate(year, month, day - 40, out error);
+                kind = Kind.DNumber; // D numbers get 40 added to the day.
+                return GetDate(year, month, day - DhNumberBase, out error);
             }
 
-            if (month > 40)
+            if (month > DhNumberBase)
             {
-                kind = Kind.HNumber;
-                return GetDate(year, month - 40, day, out error);
+                kind = Kind.HNumber; // H numbers get 40 added to the month.
+                return GetDate(year, month - DhNumberBase, day, out error);
             }
 
             kind = Kind.FNumber;
@@ -285,13 +293,13 @@ namespace Redskap
                 // There's no point in validating year, as any non-null
                 // result from GetFullYear should be a valid year.
 
-                if (month is < 1 or > 12)
+                if (month is < MinMonth or > MaxMonth)
                 {
                     error = ParseError.InvalidMonth;
                     return null;
                 }
 
-                if (day < 1 || day > DateTime.DaysInMonth(year, month))
+                if (day < MinDayOfMonth || day > DateTime.DaysInMonth(year, month))
                 {
                     error = ParseError.InvalidDayOfMonth;
                     return null;
