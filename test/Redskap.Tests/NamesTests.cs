@@ -50,7 +50,7 @@ namespace Redskap.Tests
         {
             var names = Enumerable.Range(0, 100)
                 .Select(_ => Generator.GenerateGivenName(gender))
-                .Count(x => x.Contains(" "));
+                .Count(x => x.Contains(' '));
 
             Assert.InRange(names, low, high);
         }
@@ -60,7 +60,7 @@ namespace Redskap.Tests
         {
             var names = Enumerable.Range(0, 100)
                 .Select(_ => Generator.GenerateGivenName(Gender.Male))
-                .Count(x => x.Contains("-"));
+                .Count(x => x.Contains('-'));
 
             Assert.InRange(names, 0, 5);
         }
@@ -70,7 +70,7 @@ namespace Redskap.Tests
         {
             var names = Enumerable.Range(0, 100)
                 .Select(_ => Generator.GenerateFamilyName())
-                .Count(x => x.Contains(" "));
+                .Count(x => x.Contains(' '));
 
             Assert.InRange(names, 0, 15);
         }
@@ -80,7 +80,7 @@ namespace Redskap.Tests
         {
             var names = Enumerable.Range(0, 100)
                 .Select(_ => Generator.GenerateFamilyName())
-                .Count(x => x.Contains("-"));
+                .Count(x => x.Contains('-'));
 
             Assert.InRange(names, 5, 15);
         }
