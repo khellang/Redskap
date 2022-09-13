@@ -9,16 +9,21 @@ namespace Redskap
     /// </summary>
     public static class Dates
     {
-        private static readonly ConcurrentDictionary<int, ISet<Holiday>> Holidays = new();
+        private static readonly ConcurrentDictionary<int, ISet<PublicHoliday>> Holidays = new();
 
         /// <summary>
         /// Checks whether the specified <paramref name="dateTime"/> is in a weekend, i.e. Saturday or Sunday.
         /// </summary>
         /// <param name="dateTime">The date/time instance to check.</param>
         /// <returns><see langword="true"/> if the date is in a weekend; otherwise, <see langword="false"/>.</returns>
-        public static bool IsWeekend(this DateTime dateTime) =>
-            dateTime.DayOfWeek == DayOfWeek.Saturday
-                || dateTime.DayOfWeek == DayOfWeek.Sunday;
+        public static bool IsWeekend(this DateTime dateTime) => dateTime.DayOfWeek.IsWeekend();
+
+        /// <summary>
+        /// Checks whether the specified <paramref name="dayOfWeek"/> is in a weekend, i.e. Saturday or Sunday.
+        /// </summary>
+        /// <param name="dayOfWeek">The <see cref="DayOfWeek"/> instance to check.</param>
+        /// <returns><see langword="true"/> if the day is in a weekend; otherwise, <see langword="false"/>.</returns>
+        public static bool IsWeekend(this DayOfWeek dayOfWeek) => dayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday;
 
         /// <summary>
         /// Checks whether the specified <paramref name="dateTime"/> is a Norwegian public holiday.
@@ -27,7 +32,7 @@ namespace Redskap
         /// <returns><see langword="true"/> if the date is a Norwegian public holiday; otherwise, <see langword="false"/>.</returns>
         public static bool IsHoliday(this DateTime dateTime) =>
             GetHolidaysForYear(dateTime.Year)
-                .Contains(new Holiday(dateTime, string.Empty, string.Empty));
+                .Contains(new PublicHoliday(dateTime));
 
         /// <summary>
         /// Checks whether the specified <paramref name="dateTime"/> is a working
@@ -95,18 +100,18 @@ namespace Redskap
         /// </summary>
         /// <param name="year">The year to get all Norwegian public holidays for.</param>
         /// <returns>All Norwegian public holidays for the specified year.</returns>
-        public static IEnumerable<Holiday> GetHolidays(int year) => GetHolidaysForYear(year);
+        public static IEnumerable<PublicHoliday> GetHolidays(int year) => GetHolidaysForYear(year);
 
-        private static ISet<Holiday> GetHolidaysForYear(int year)
+        private static ISet<PublicHoliday> GetHolidaysForYear(int year)
         {
             // ReSharper disable once ConvertClosureToMethodGroup
             return Holidays.GetOrAdd(year, y => CreateHolidaySet(y));
 
-            static ISet<Holiday> CreateHolidaySet(int year)
+            static ISet<PublicHoliday> CreateHolidaySet(int year)
             {
                 var easterSunday = CalculateEasterSunday(year);
 
-                return new HashSet<Holiday>(DateOnlyEqualityComparer.Instance)
+                return new HashSet<PublicHoliday>(DateOnlyEqualityComparer.Instance)
                 {
                     new(year, 1, 1, "Første nyttårsdag", "New Year's Day"),
                     new(easterSunday.AddDays(-3), "Skjærtorsdag", "Maundy Thursday"),
@@ -151,7 +156,7 @@ namespace Redskap
         /// Equality comparer used as an optimization for checking only day
         /// and month of a date, since we already know the year is equal.
         /// </summary>
-        private class DateOnlyEqualityComparer : IEqualityComparer<Holiday>
+        private class DateOnlyEqualityComparer : IEqualityComparer<PublicHoliday>
         {
             public static readonly DateOnlyEqualityComparer Instance = new();
 
@@ -159,12 +164,12 @@ namespace Redskap
             {
             }
 
-            public bool Equals(Holiday x, Holiday y)
+            public bool Equals(PublicHoliday x, PublicHoliday y)
             {
-                return x.Date.Day == y.Date.Day && x.Date.Month == y.Date.Month;
+                return x.Date.Day.Equals(y.Date.Day) && x.Date.Month.Equals(y.Date.Month);
             }
 
-            public int GetHashCode(Holiday obj)
+            public int GetHashCode(PublicHoliday obj)
             {
                 return HashCode.Combine(obj.Date.Day, obj.Date.Month);
             }
