@@ -26,9 +26,12 @@
     <PackageTags>norway;norwegian;fødselsnummer;personnummer;parser;validator</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Kristian Hellang</Authors>
+    
+    <PolySharpExcludeGeneratedTypes>System.Range</PolySharpExcludeGeneratedTypes>
   </PropertyGroup>
   
   <ItemGroup>
+    <InternalsVisibleTo Include="$(AssemblyName).Tests" />
     <None Include="../../icon.png" Pack="true" PackagePath="/" />
     <Compile Update="IdentificationNumber.Formatting.cs">
       <DependentUpon>IdentificationNumber.cs</DependentUpon>
@@ -88,9 +91,9 @@
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
-    <PackageReference Include="Nullable" Version="1.3.1">
+    <PackageReference Include="PolySharp" Version="1.12.1">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 

@@ -5,7 +5,7 @@ using NoCommons.Person;
 
 namespace Redskap.Benchmarks
 {
-    public class GenerateBenchmark
+    public class GenerateIdentificationNumberBenchmark
     {
         [Benchmark(Baseline = true)]
         public IdentificationNumber Redskap()

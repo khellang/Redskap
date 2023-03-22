@@ -6,7 +6,7 @@ using TeddValidator = Tedd.Fodselsnummer.FodselsnummerValidator;
 
 namespace Redskap.Benchmarks
 {
-    public class IsValidBenchmark
+    public class IsValidIdentificationNumberBenchmark
     {
         private const string Value = "28089647063";
 
