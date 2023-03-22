@@ -26,7 +26,7 @@ public readonly partial struct BankAccountNumber
     /// <see cref="BankAccountNumber"/> instance. The return value
     /// indicates whether the parsing succeeded. Parsing will fail if
     /// <paramref name="value"/> is <see langword="null"/>, empty, has an invalid
-    /// length, doesn't match checksum digits or has an otherwise invalid format.
+    /// length, doesn't match the checksum digit or has an otherwise invalid format.
     /// </summary>
     /// <param name="value">A string containing the number to parse.</param>
     /// <param name="result">The resulting <see cref="BankAccountNumber"/> if parsing succeeded.</param>
@@ -44,7 +44,7 @@ public readonly partial struct BankAccountNumber
     /// <see cref="BankAccountNumber"/> instance. The return value
     /// indicates whether the parsing succeeded. Parsing will fail if
     /// <paramref name="value"/> is <see langword="null"/>, empty, has an invalid
-    /// length, doesn't match checksum digits or has an otherwise invalid format.
+    /// length, doesn't match the checksum digit or has an otherwise invalid format.
     /// </summary>
     /// <param name="value">A string containing the number to parse.</param>
     /// <param name="result">The resulting <see cref="BankAccountNumber"/> if parsing succeeded.</param>

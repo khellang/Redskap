@@ -89,6 +89,9 @@
     <Compile Update="BankAccountNumber.Parsing.cs">
       <DependentUpon>BankAccountNumber.cs</DependentUpon>
     </Compile>
+    <Compile Update="BankAccountNumber.Parsing.netstandard.cs">
+      <DependentUpon>BankAccountNumber.Parsing.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
