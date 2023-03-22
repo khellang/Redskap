@@ -14,7 +14,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <RepositoryType>git</RepositoryType>
 
-    <MinVerDefaultPreReleasePhase>beta</MinVerDefaultPreReleasePhase>
+    <MinVerDefaultPreReleaseIdentifiers>beta.0</MinVerDefaultPreReleaseIdentifiers>
     <MinVerTagPrefix>v</MinVerTagPrefix>
 
     <Description>A collection of blazing fast Norwegian utilities with a modern API. These include:
@@ -99,7 +99,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="MinVer" Version="4.2.0" PrivateAssets="All" />
+    <PackageReference Include="MinVer" Version="4.3.0" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
