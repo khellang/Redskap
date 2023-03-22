@@ -86,6 +86,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FamilyNames.tt</DependentUpon>
     </Compile>
+    <Compile Update="BankAccountNumber.Parsing.cs">
+      <DependentUpon>BankAccountNumber.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">

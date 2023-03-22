@@ -63,7 +63,7 @@ namespace Redskap.Tests
 
         public class TestData
         {
-            public TestData(string value, Gender gender, DateTime dateOfBirth, Kind kind)
+            private TestData(string value, Gender gender, DateTime dateOfBirth, Kind kind)
             {
                 Value = value;
                 Gender = gender;
