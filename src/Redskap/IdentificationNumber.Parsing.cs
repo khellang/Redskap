@@ -156,6 +156,8 @@ namespace Redskap
             result = default;
             error = default;
 
+            value = value.Trim();
+
             if (value.Length != Length)
             {
                 error = ParseError.InvalidLength;
