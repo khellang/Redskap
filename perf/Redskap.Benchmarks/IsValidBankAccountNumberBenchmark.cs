@@ -2,22 +2,21 @@ using BenchmarkDotNet.Attributes;
 using NoCommons.Banking;
 using TeddValidator = Tedd.Fodselsnummer.FodselsnummerValidator;
 
-namespace Redskap.Benchmarks
+namespace Redskap.Benchmarks;
+
+public class IsValidBankAccountNumberBenchmark
 {
-    public class IsValidBankAccountNumberBenchmark
+    private const string Value = "93398290133";
+
+    [Benchmark(Baseline = true)]
+    public bool Redskap()
     {
-        private const string Value = "93398290133";
+        return BankAccountNumber.IsValid(Value);
+    }
 
-        [Benchmark(Baseline = true)]
-        public bool Redskap()
-        {
-            return BankAccountNumber.IsValid(Value);
-        }
-
-        [Benchmark]
-        public bool NoCommons()
-        {
-            return KontonummerValidator.IsValid(Value);
-        }
+    [Benchmark]
+    public bool NoCommons()
+    {
+        return KontonummerValidator.IsValid(Value);
     }
 }

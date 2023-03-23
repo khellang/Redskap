@@ -1,18 +1,17 @@
-namespace Redskap
+namespace Redskap;
+
+/// <summary>
+/// An enum representing either of the two sexes, <see cref="Male"/> and <see cref="Female"/>.
+/// </summary>
+public enum Gender
 {
     /// <summary>
-    /// An enum representing either of the two sexes, <see cref="Male"/> and <see cref="Female"/>.
+    /// The male sex.
     /// </summary>
-    public enum Gender
-    {
-        /// <summary>
-        /// The male sex.
-        /// </summary>
-        Female = 0,
+    Female = 0,
 
-        /// <summary>
-        /// The female sex.
-        /// </summary>
-        Male = 1,
-    }
+    /// <summary>
+    /// The female sex.
+    /// </summary>
+    Male = 1,
 }

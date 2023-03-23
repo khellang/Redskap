@@ -1,13 +1,13 @@
 using System;
 using static Redskap.FormattingHelpers;
 
-namespace Redskap
+namespace Redskap;
+
+public readonly partial struct IdentificationNumber
 {
-    public readonly partial struct IdentificationNumber
+    /// <inheritdoc />
+    public override string ToString()
     {
-        /// <inheritdoc />
-        public override string ToString()
-        {
 #if NETSTANDARD
             var buffer = new char[Length];
 
@@ -15,54 +15,53 @@ namespace Redskap
 
             return new string(buffer);
 #else
-            return string.Create(Length, this, (span, number) =>
-            {
-                Format(number, span);
-            });
+        return string.Create(Length, this, (span, number) =>
+        {
+            Format(number, span);
+        });
 #endif
-        }
+    }
 
-        private static void Format(IdentificationNumber number, Span<char> buffer)
+    private static void Format(IdentificationNumber number, Span<char> buffer)
+    {
+        WriteTwoDecimalDigits((uint) number.CheckDigits, buffer, 9);
+        WriteThreeDecimalDigits((uint) number.IndividualNumber, buffer, 6);
+        WriteDateOfBirth(buffer, number.DateOfBirth, number.NumberKind);
+    }
+
+    private static void WriteDateOfBirth(Span<char> destination, DateTime dateOfBirth, Kind kind)
+    {
+        WriteYear(destination, dateOfBirth);
+        WriteMonth(destination, dateOfBirth, kind);
+        WriteDay(destination, dateOfBirth, kind);
+    }
+
+    private static void WriteDay(Span<char> destination, DateTime dateOfBirth, Kind kind)
+    {
+        var day = dateOfBirth.Day;
+
+        if (kind == Kind.DNumber)
         {
-            WriteTwoDecimalDigits((uint) number.CheckDigits, buffer, 9);
-            WriteThreeDecimalDigits((uint) number.IndividualNumber, buffer, 6);
-            WriteDateOfBirth(buffer, number.DateOfBirth, number.NumberKind);
+            day += 40;
         }
 
-        private static void WriteDateOfBirth(Span<char> destination, DateTime dateOfBirth, Kind kind)
+        WriteTwoDecimalDigits((uint) day, destination, 0);
+    }
+
+    private static void WriteMonth(Span<char> destination, DateTime dateOfBirth, Kind kind)
+    {
+        var month = dateOfBirth.Month;
+
+        if (kind == Kind.HNumber)
         {
-            WriteYear(destination, dateOfBirth);
-            WriteMonth(destination, dateOfBirth, kind);
-            WriteDay(destination, dateOfBirth, kind);
+            month += 40;
         }
 
-        private static void WriteDay(Span<char> destination, DateTime dateOfBirth, Kind kind)
-        {
-            var day = dateOfBirth.Day;
+        WriteTwoDecimalDigits((uint) month, destination, 2);
+    }
 
-            if (kind == Kind.DNumber)
-            {
-                day += 40;
-            }
-
-            WriteTwoDecimalDigits((uint) day, destination, 0);
-        }
-
-        private static void WriteMonth(Span<char> destination, DateTime dateOfBirth, Kind kind)
-        {
-            var month = dateOfBirth.Month;
-
-            if (kind == Kind.HNumber)
-            {
-                month += 40;
-            }
-
-            WriteTwoDecimalDigits((uint) month, destination, 2);
-        }
-
-        private static void WriteYear(Span<char> destination, DateTime dateOfBirth)
-        {
-            WriteTwoDecimalDigits((uint) dateOfBirth.Year % 100, destination, 4);
-        }
+    private static void WriteYear(Span<char> destination, DateTime dateOfBirth)
+    {
+        WriteTwoDecimalDigits((uint) dateOfBirth.Year % 100, destination, 4);
     }
 }
