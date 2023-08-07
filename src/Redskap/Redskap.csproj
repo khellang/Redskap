@@ -93,7 +93,7 @@
       <DependentUpon>FamilyNames.tt</DependentUpon>
     </Compile>
     <Compile Update="BankAccountNumber.Formatting.cs">
-      <DependentUpon>BankAccountNumber.Parsing.cs</DependentUpon>
+      <DependentUpon>BankAccountNumber.cs</DependentUpon>
     </Compile>
     <Compile Update="BankAccountNumber.Parsing.cs">
       <DependentUpon>BankAccountNumber.cs</DependentUpon>
