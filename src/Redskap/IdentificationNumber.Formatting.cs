@@ -9,11 +9,11 @@ public readonly partial struct IdentificationNumber
     public override string ToString()
     {
 #if NETSTANDARD
-            var buffer = new char[Length];
+        var buffer = new char[Length];
 
-            Format(this, buffer);
+        Format(this, buffer);
 
-            return new string(buffer);
+        return new string(buffer);
 #else
         return string.Create(Length, this, (span, number) =>
         {

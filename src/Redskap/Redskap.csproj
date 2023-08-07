@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
-    
+
     <PackageProjectUrl>https://github.com/khellang/Redskap</PackageProjectUrl>
     <RepositoryUrl>https://github.com/khellang/Redskap</RepositoryUrl>
 
@@ -26,10 +26,10 @@
     <PackageTags>norway;norwegian;fødselsnummer;personnummer;parser;validator</PackageTags>
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Kristian Hellang</Authors>
-    
+
     <PolySharpExcludeGeneratedTypes>System.Range</PolySharpExcludeGeneratedTypes>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <InternalsVisibleTo Include="$(AssemblyName).Tests" />
     <None Include="../../icon.png" Pack="true" PackagePath="/" />
@@ -86,6 +86,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FamilyNames.tt</DependentUpon>
     </Compile>
+    <Compile Update="BankAccountNumber.Formatting.cs">
+      <DependentUpon>BankAccountNumber.Parsing.cs</DependentUpon>
+    </Compile>
     <Compile Update="BankAccountNumber.Parsing.cs">
       <DependentUpon>BankAccountNumber.cs</DependentUpon>
     </Compile>
@@ -93,7 +96,7 @@
       <DependentUpon>BankAccountNumber.Parsing.cs</DependentUpon>
     </Compile>
   </ItemGroup>
-  
+
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.Bcl.HashCode" Version="1.1.1" />
     <PackageReference Include="System.Memory" Version="4.5.5" />

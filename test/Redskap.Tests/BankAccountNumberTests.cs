@@ -19,7 +19,7 @@ public class BankAccountNumberTests
             Assert.Equal(testData.AccountGroup, result.AccountGroup);
             Assert.Equal(testData.CustomerNumber, result.CustomerNumber);
             Assert.Equal(testData.CheckDigit, result.CheckDigit);
-            // Assert.Equal(testData.Value, result.ToString());
+            Assert.Equal(testData.Value, result.ToString());
         }
     }
 
@@ -60,9 +60,9 @@ public class BankAccountNumberTests
             foreach (var line in File.ReadLines(fileName))
             {
                 var registerNumber = int.Parse(line.AsSpan().Slice(0, 4));
-                var accountGroup = int.Parse(line.AsSpan().Slice(4, 2));
-                var customerNumber = int.Parse(line.AsSpan().Slice(6, 4));
-                var checkDigit = int.Parse(line.AsSpan().Slice(10, 1));
+                var accountGroup = int.Parse(line.AsSpan().Slice(5, 2));
+                var customerNumber = int.Parse(line.AsSpan().Slice(8, 4));
+                var checkDigit = int.Parse(line.AsSpan().Slice(12, 1));
 
                 yield return new TestData(line, registerNumber, accountGroup, customerNumber, checkDigit);
             }
