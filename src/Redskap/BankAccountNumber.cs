@@ -4,7 +4,8 @@ namespace Redskap;
 
 /// <summary>
 /// Represents a Norwegian bank account number.
-/// The number consists of a <see cref="RegisterNumber"/>, an <see cref="AccountGroup"/> and a <see cref="CustomerNumber"/>.
+/// The number consists of a <see cref="RegisterNumber"/>, an <see cref="AccountGroup"/> and a <see cref="CustomerNumber"/>,
+/// as well as a <see cref="CheckDigit"/>.
 /// </summary>
 public readonly partial struct BankAccountNumber : IEquatable<BankAccountNumber>
 {
