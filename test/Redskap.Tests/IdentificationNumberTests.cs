@@ -61,6 +61,24 @@ public class IdentificationNumberTests
         }
     }
 
+    [Fact]
+    public void Generate_With_Specification()
+    {
+        var gen = new Generator(new Random(123));
+        var earliest = DateTime.Now.AddYears(-80).Date;
+        var latest = DateTime.Now.AddYears(0).Date;
+        foreach (var gender in new[] { Gender.Female, Gender.Male })
+        {
+            for (var i = 0; i < 10_000; i++)
+            {
+                var generated = gen.Generate(Kind.FNumber, gender, earliest, latest);
+
+                Assert.InRange(generated.DateOfBirth, earliest, latest);
+                Assert.Equal(gender, generated.Gender);
+            }
+        }
+    }
+
     public class TestData
     {
         private TestData(string value, Gender gender, DateTime dateOfBirth, Kind kind)

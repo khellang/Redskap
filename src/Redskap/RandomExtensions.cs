@@ -60,7 +60,7 @@ internal static class RandomExtensions
         // Adjust to an odd or even seed based on the specified gender:
         // - Female is even
         // - Male is odd
-        if (gender == Gender.Male && seed % 2 == 0)
+        if ((gender == Gender.Male) == (seed % 2 == 0))
         {
             seed = ++seed % count;
         }
