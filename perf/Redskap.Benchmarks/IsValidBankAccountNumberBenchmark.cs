@@ -1,6 +1,5 @@
 using BenchmarkDotNet.Attributes;
 using NoCommons.Banking;
-using TeddValidator = Tedd.Fodselsnummer.FodselsnummerValidator;
 
 namespace Redskap.Benchmarks;
 
