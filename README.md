@@ -14,20 +14,15 @@ Parsing is built on modern APIs such as `ReadOnlySpan<T>`, which makes it really
 
 ### Benchmarks
 
-The results of the [`IsValidBenchmark`](https://github.com/khellang/Redskap/blob/b2b6ae87542825d379793ef6c8b1508012786616/perf/Redskap.Benchmarks/IsValidBenchmark.cs):
+The results of the [`IsValidIdentificationNumberBenchmark`](https://github.com/khellang/Redskap/blob/main/perf/Redskap.Benchmarks/IsValidIdentificationNumberBenchmark.cs) on .NET 8:
 
-| Method    | Runtime              |        Mean |     Error |    StdDev | Ratio | RatioSD |  Gen 0 | Allocated |
-| --------- | -------------------- | ----------: | --------: | --------: | ----: | ------: | -----: | --------: |
-| Redskap   | .NET 5.0             |    58.23 ns |  0.478 ns |  0.423 ns |  0.60 |    0.01 |      - |         - |
-| Nonin     | .NET 5.0             |   270.45 ns |  3.257 ns |  2.888 ns |  2.79 |    0.04 | 0.0315 |     264 B |
-| NoCommons | .NET 5.0             |   923.89 ns |  5.672 ns |  5.306 ns |  9.52 |    0.07 | 0.0458 |     384 B |
-| Tedd      | .NET 5.0             | 2,354.07 ns | 23.517 ns | 21.998 ns | 24.29 |    0.30 | 0.2975 |   2,512 B |
-| NinEngine | .NET 5.0             |   383.86 ns |  3.804 ns |  3.558 ns |  3.96 |    0.04 | 0.0153 |     128 B |
-| Redskap   | .NET Framework 4.7.2 |    96.97 ns |  0.594 ns |  0.527 ns |  1.00 |    0.00 |      - |         - |
-| Nonin     | .NET Framework 4.7.2 |   480.74 ns |  7.024 ns |  6.570 ns |  4.95 |    0.06 | 0.0410 |     265 B |
-| NoCommons | .NET Framework 4.7.2 | 1,348.68 ns |  5.854 ns |  5.475 ns | 13.91 |    0.07 | 0.0629 |     409 B |
-| Tedd      | .NET Framework 4.7.2 | 4,086.77 ns | 33.722 ns | 31.544 ns | 42.13 |    0.49 | 0.4349 |   2,760 B |
-| NinEngine | .NET Framework 4.7.2 |   648.94 ns |  5.967 ns |  5.289 ns |  6.69 |    0.06 | 0.0200 |     128 B |
+| Method    | Mean        | Error     | StdDev    | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
+|---------- |------------:|----------:|----------:|------:|--------:|-------:|----------:|------------:|
+| Redskap   |    27.63 ns |  0.291 ns |  0.272 ns |  1.00 |    0.00 |      - |         - |          NA |
+| Nonin     |   118.67 ns |  1.315 ns |  1.098 ns |  4.30 |    0.06 | 0.0315 |     264 B |          NA |
+| NoCommons |   265.39 ns |  2.474 ns |  2.314 ns |  9.61 |    0.15 | 0.0458 |     384 B |          NA |
+| Tedd      | 1,357.05 ns | 11.306 ns | 10.023 ns | 49.10 |    0.57 | 0.2995 |    2512 B |          NA |
+| NinEngine |   329.70 ns |  1.598 ns |  1.495 ns | 11.93 |    0.11 | 0.0153 |     128 B |          NA |
 
 ## Generation
 
@@ -37,13 +32,10 @@ If you want to control the randomness of the generation, e.g. for unit testing, 
 
 ### Benchmarks
 
-The results of the [`GenerateBenchmark`](https://github.com/khellang/Redskap/blob/b2b6ae87542825d379793ef6c8b1508012786616/perf/Redskap.Benchmarks/GenerateBenchmark.cs):
+The results of the [`GenerateIdentificationNumberBenchmark`](https://github.com/khellang/Redskap/blob/main/perf/Redskap.Benchmarks/GenerateIdentificationNumberBenchmark.cs) on .NET 8:
 
-| Method    | Runtime              |           Mean |        Error |       StdDev |    Ratio | RatioSD |    Gen 0 |   Gen 1 | Allocated |
-| --------- | -------------------- | -------------: | -----------: | -----------: | -------: | ------: | -------: | ------: | --------: |
-| Redskap   | .NET 5.0             |       328.0 ns |      2.95 ns |      2.76 ns |     0.82 |    0.01 |        - |       - |         - |
-| NoCommons | .NET 5.0             | 2,173,367.9 ns | 11,802.91 ns | 10,462.97 ns | 5,411.11 |   37.73 |  74.2188 |  7.8125 | 621,440 B |
-| NinEngine | .NET 5.0             |     2,335.9 ns |     14.71 ns |     13.04 ns |     5.82 |    0.03 |   0.3662 |       - |   3,090 B |
-| Redskap   | .NET Framework 4.7.2 |       401.8 ns |      1.76 ns |      1.65 ns |     1.00 |    0.00 |        - |       - |         - |
-| NoCommons | .NET Framework 4.7.2 | 2,734,492.1 ns | 11,812.94 ns | 11,049.83 ns | 6,805.64 |   34.93 | 117.1875 | 11.7188 | 745,792 B |
-| NinEngine | .NET Framework 4.7.2 |     2,920.9 ns |      8.30 ns |      7.36 ns |     7.27 |    0.03 |   0.5722 |       - |   3,623 B |
+| Method    | Mean           | Error        | StdDev       | Ratio    | RatioSD | Gen0    | Gen1   | Allocated | Alloc Ratio |
+|---------- |---------------:|-------------:|-------------:|---------:|--------:|--------:|-------:|----------:|------------:|
+| Redskap   |       140.6 ns |      1.02 ns |      0.85 ns |     1.00 |    0.00 |       - |      - |         - |          NA |
+| NoCommons | 1,161,481.9 ns | 12,681.80 ns | 11,862.56 ns | 8,275.50 |   80.83 | 66.4063 | 7.8125 |  566769 B |          NA |
+| NinEngine |     1,632.0 ns |     28.36 ns |     26.53 ns |    11.58 |    0.19 |  0.3681 |      - |    3092 B |          NA |
