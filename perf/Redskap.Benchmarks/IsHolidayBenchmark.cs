@@ -9,6 +9,11 @@ public class IsHolidayBenchmark
 {
     private static readonly DateTime Date = new(2021, 04, 01);
 
+    static IsHolidayBenchmark()
+    {
+        DateSystem.LicenseKey = "LostTimeIsNeverFoundAgain";
+    }
+
     [Benchmark(Baseline = true)]
     public bool Redskap()
     {
