@@ -55,6 +55,8 @@ namespace Redskap
 
     private static IEnumerable<PostCode> GetPostCodes()
     {
+        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
         using var client = new WebClient();
 
         using var stream = client.OpenRead("https://www.bring.no/postnummerregister-ansi.txt");
