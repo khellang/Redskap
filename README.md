@@ -39,3 +39,11 @@ The results of the [`GenerateIdentificationNumberBenchmark`](https://github.com/
 | Redskap   |       140.6 ns |      1.02 ns |      0.85 ns |     1.00 |    0.00 |       - |      - |         - |          NA |
 | NoCommons | 1,161,481.9 ns | 12,681.80 ns | 11,862.56 ns | 8,275.50 |   80.83 | 66.4063 | 7.8125 |  566769 B |          NA |
 | NinEngine |     1,632.0 ns |     28.36 ns |     26.53 ns |    11.58 |    0.19 |  0.3681 |      - |    3092 B |          NA |
+
+## Sponsors
+
+[Entity Framework Extensions](https://entityframework-extensions.net/?utm_source=khellang&utm_medium=Redskap) and [Dapper Plus](https://dapper-plus.net/?utm_source=khellang&utm_medium=Redskap) are major sponsors and proud to contribute to the development of Redskap.
+
+[![Entity Framework Extensions](https://raw.githubusercontent.com/khellang/khellang/refs/heads/master/.github/entity-framework-extensions-sponsor.png)](https://entityframework-extensions.net/bulk-insert?utm_source=khellang&utm_medium=Redskap)
+
+[![Dapper Plus](https://raw.githubusercontent.com/khellang/khellang/refs/heads/master/.github/dapper-plus-sponsor.png)](https://dapper-plus.net/bulk-insert?utm_source=khellang&utm_medium=Redskap)
