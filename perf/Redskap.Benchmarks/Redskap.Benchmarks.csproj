@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <IsPackable>False</IsPackable>
     <OutputType>Exe</OutputType>
     <NoWarn>NU1701</NoWarn>
@@ -11,11 +11,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
-    <PackageReference Include="Nager.Date" Version="1.47.1" />
-    <PackageReference Include="NoCommons" Version="3.0.0" />
-    <PackageReference Include="Nonin" Version="1.0.0.3" />
-    <PackageReference Include="nor-id-num" Version="1.0.6" />
-    <PackageReference Include="Tedd.Fodselsnummer" Version="1.1.5" />
+    <PackageReference Include="BenchmarkDotNet" />
+    <PackageReference Include="Nager.Date" />
+    <PackageReference Include="NoCommons" />
+    <PackageReference Include="Nonin" />
+    <PackageReference Include="nor-id-num" />
+    <PackageReference Include="Tedd.Fodselsnummer" />
   </ItemGroup>
 </Project>

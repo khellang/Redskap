@@ -14,15 +14,15 @@ Parsing is built on modern APIs such as `ReadOnlySpan<T>`, which makes it really
 
 ### Benchmarks
 
-The results of the [`IsValidIdentificationNumberBenchmark`](https://github.com/khellang/Redskap/blob/main/perf/Redskap.Benchmarks/IsValidIdentificationNumberBenchmark.cs) on .NET 8:
+The results of the [`IsValidIdentificationNumberBenchmark`](https://github.com/khellang/Redskap/blob/main/perf/Redskap.Benchmarks/IsValidIdentificationNumberBenchmark.cs) on .NET 10:
 
-| Method    | Mean        | Error     | StdDev    | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
-|---------- |------------:|----------:|----------:|------:|--------:|-------:|----------:|------------:|
-| Redskap   |    27.63 ns |  0.291 ns |  0.272 ns |  1.00 |    0.00 |      - |         - |          NA |
-| Nonin     |   118.67 ns |  1.315 ns |  1.098 ns |  4.30 |    0.06 | 0.0315 |     264 B |          NA |
-| NoCommons |   265.39 ns |  2.474 ns |  2.314 ns |  9.61 |    0.15 | 0.0458 |     384 B |          NA |
-| Tedd      | 1,357.05 ns | 11.306 ns | 10.023 ns | 49.10 |    0.57 | 0.2995 |    2512 B |          NA |
-| NinEngine |   329.70 ns |  1.598 ns |  1.495 ns | 11.93 |    0.11 | 0.0153 |     128 B |          NA |
+| Method    | Mean      | Error     | StdDev    | Ratio | RatioSD | Gen0   | Allocated | Alloc Ratio |
+|---------- |----------:|----------:|----------:|------:|--------:|-------:|----------:|------------:|
+| Redskap   |  16.88 ns |  0.069 ns |  0.061 ns |  1.00 |    0.00 |      - |         - |          NA |
+| Nonin     |  77.54 ns |  1.115 ns |  0.989 ns |  4.59 |    0.06 | 0.0370 |     232 B |          NA |
+| NoCommons | 143.06 ns |  2.581 ns |  2.288 ns |  8.48 |    0.14 | 0.0484 |     304 B |          NA |
+| Tedd      | 893.48 ns | 14.738 ns | 13.786 ns | 52.90 |    0.86 | 0.3633 |    2280 B |          NA |
+| NinEngine | 264.39 ns |  3.212 ns |  2.847 ns | 15.66 |    0.18 | 0.0200 |     128 B |          NA |
 
 ## Generation
 
@@ -32,13 +32,13 @@ If you want to control the randomness of the generation, e.g. for unit testing, 
 
 ### Benchmarks
 
-The results of the [`GenerateIdentificationNumberBenchmark`](https://github.com/khellang/Redskap/blob/main/perf/Redskap.Benchmarks/GenerateIdentificationNumberBenchmark.cs) on .NET 8:
+The results of the [`GenerateIdentificationNumberBenchmark`](https://github.com/khellang/Redskap/blob/main/perf/Redskap.Benchmarks/GenerateIdentificationNumberBenchmark.cs) on .NET 10:
 
-| Method    | Mean           | Error        | StdDev       | Ratio    | RatioSD | Gen0    | Gen1   | Allocated | Alloc Ratio |
-|---------- |---------------:|-------------:|-------------:|---------:|--------:|--------:|-------:|----------:|------------:|
-| Redskap   |       140.6 ns |      1.02 ns |      0.85 ns |     1.00 |    0.00 |       - |      - |         - |          NA |
-| NoCommons | 1,161,481.9 ns | 12,681.80 ns | 11,862.56 ns | 8,275.50 |   80.83 | 66.4063 | 7.8125 |  566769 B |          NA |
-| NinEngine |     1,632.0 ns |     28.36 ns |     26.53 ns |    11.58 |    0.19 |  0.3681 |      - |    3092 B |          NA |
+| Method    | Mean          | Error        | StdDev       | Ratio    | RatioSD | Gen0    | Gen1   | Allocated | Alloc Ratio |
+|---------- |--------------:|-------------:|-------------:|---------:|--------:|--------:|-------:|----------:|------------:|
+| Redskap   |      85.93 ns |     0.449 ns |     0.375 ns |     1.00 |    0.00 |       - |      - |         - |          NA |
+| NoCommons | 630,182.62 ns | 9,721.718 ns | 8,118.075 ns | 7,334.22 |   98.93 | 85.9375 | 8.7891 |  541961 B |          NA |
+| NinEngine |            NA |           NA |           NA |        ? |       ? |      NA |     NA |        NA |           ? |
 
 ## Sponsors
 
