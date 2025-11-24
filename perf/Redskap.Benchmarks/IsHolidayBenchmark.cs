@@ -11,7 +11,7 @@ public class IsHolidayBenchmark
 
     static IsHolidayBenchmark()
     {
-        DateSystem.LicenseKey = "LostTimeIsNeverFoundAgain";
+        HolidaySystem.LicenseKey = "LostTimeIsNeverFoundAgain";
     }
 
     [Benchmark(Baseline = true)]
@@ -29,6 +29,6 @@ public class IsHolidayBenchmark
     [Benchmark]
     public bool Nager()
     {
-        return DateSystem.IsPublicHoliday(Date, CountryCode.NO);
+        return HolidaySystem.IsPublicHoliday(Date, CountryCode.NO);
     }
 }
